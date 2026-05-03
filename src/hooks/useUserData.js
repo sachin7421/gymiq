@@ -97,7 +97,7 @@ export function useUserData(userId) {
         const { data, error: dbErr } = await supabase
           .from('user_data')
           .select('data')
-          .eq('user_id', userId)
+          .eq('id', userId)
           .maybeSingle()
         if (dbErr) throw dbErr
 
@@ -141,7 +141,7 @@ export function useUserData(userId) {
     try {
       const { error: dbErr } = await supabase
         .from('user_data')
-        .upsert({ user_id: userId, data: payload, updated_at: new Date().toISOString() }, { onConflict: 'user_id' })
+        .upsert({ id: userId, data: payload, updated_at: new Date().toISOString() })
       if (dbErr) throw dbErr
       setSyncStatus('synced')
     } catch (e) {
