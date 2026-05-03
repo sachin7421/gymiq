@@ -1,0 +1,130 @@
+export const EQUIPMENT_LIST = [
+  // Free Weights
+  { id: 'dumbbells', name: 'Dumbbells', icon: '🏋️', cat: 'Free Weights' },
+  { id: 'barbell', name: 'Barbell + Plates', icon: '⚖️', cat: 'Free Weights' },
+  { id: 'kettlebells', name: 'Kettlebells', icon: '🏺', cat: 'Free Weights' },
+  { id: 'ez_bar', name: 'EZ Curl Bar', icon: '〰️', cat: 'Free Weights' },
+  // Machines
+  { id: 'cable_machine', name: 'Cable Machine', icon: '🔀', cat: 'Machines' },
+  { id: 'smith_machine', name: 'Smith Machine', icon: '🏗️', cat: 'Machines' },
+  { id: 'lat_pulldown', name: 'Lat Pulldown Machine', icon: '⬇️', cat: 'Machines' },
+  { id: 'leg_press', name: 'Leg Press Machine', icon: '🦵', cat: 'Machines' },
+  { id: 'chest_fly', name: 'Chest Fly / Pec Deck', icon: '🔁', cat: 'Machines' },
+  { id: 'leg_curl', name: 'Leg Curl Machine', icon: '🦵', cat: 'Machines' },
+  // Specialty
+  { id: 'trx', name: 'TRX / Suspension', icon: '🪢', cat: 'Specialty' },
+  { id: 'pullup_bar', name: 'Pull-up Bar', icon: '🔝', cat: 'Specialty' },
+  { id: 'dip_bar', name: 'Dip Bars', icon: '📐', cat: 'Specialty' },
+  { id: 'rings', name: 'Gymnastic Rings', icon: '⭕', cat: 'Specialty' },
+  { id: 'resistance_bands', name: 'Resistance Bands', icon: '🌀', cat: 'Specialty' },
+  { id: 'battle_ropes', name: 'Battle Ropes', icon: '🌊', cat: 'Specialty' },
+  { id: 'landmine', name: 'Landmine Attachment', icon: '🔩', cat: 'Specialty' },
+  // Bench / Rack
+  { id: 'bench', name: 'Flat Bench', icon: '🛏️', cat: 'Bench/Rack' },
+  { id: 'incline_bench', name: 'Incline/Adjustable Bench', icon: '📐', cat: 'Bench/Rack' },
+  { id: 'squat_rack', name: 'Squat Rack / Power Rack', icon: '🏛️', cat: 'Bench/Rack' },
+  // Specialty Machines
+  { id: 'hyper_extension', name: 'Hyper Extension / GHD', icon: '⚡', cat: 'Specialty' },
+  { id: 'reverse_hyper', name: 'Reverse Hyper', icon: '🔄', cat: 'Specialty' },
+  // Cardio
+  { id: 'treadmill', name: 'Treadmill', icon: '🏃', cat: 'Cardio' },
+  { id: 'bike', name: 'Stationary Bike', icon: '🚴', cat: 'Cardio' },
+  { id: 'rower', name: 'Rowing Machine', icon: '🚣', cat: 'Cardio' },
+  { id: 'jump_rope', name: 'Jump Rope', icon: '🪃', cat: 'Cardio' },
+  { id: 'elliptical', name: 'Elliptical', icon: '🔁', cat: 'Cardio' },
+  // Bodyweight
+  { id: 'yoga_mat', name: 'Yoga Mat / Floor Space', icon: '🧘', cat: 'Bodyweight' },
+  { id: 'ab_wheel', name: 'Ab Wheel', icon: '⚙️', cat: 'Bodyweight' },
+  { id: 'foam_roller', name: 'Foam Roller', icon: '🛞', cat: 'Bodyweight' },
+]
+
+export const EQUIPMENT_CATEGORIES = [
+  'Free Weights',
+  'Machines',
+  'Specialty',
+  'Bench/Rack',
+  'Cardio',
+  'Bodyweight',
+]
+
+// Exercise schema: req[]=any-of equipment, level=1/2/3, muscles[]=primary first, sets={b,i,a}
+export const EX_DB = {
+  // PUSH - CHEST
+  push_barbell_bench: { name: 'Barbell Bench Press', req: ['barbell', 'bench'], muscles: ['chest'], level: 1, icon: '🏋️', sets: { b: '3×8', i: '4×8', a: '5×5' }, cue: 'Lower to mid-chest, elbows at 45°. Press explosively.', yt: 'barbell bench press form' },
+  push_db_bench: { name: 'Dumbbell Bench Press', req: ['dumbbells', 'bench'], muscles: ['chest'], level: 1, icon: '💪', sets: { b: '3×10', i: '4×10', a: '4×8' }, cue: 'Controlled descent, press and squeeze at top.', yt: 'dumbbell bench press form' },
+  push_db_incline: { name: 'DB Incline Press', req: ['dumbbells', 'incline_bench'], muscles: ['chest'], level: 1, icon: '📐', sets: { b: '3×10', i: '3×10', a: '4×8' }, cue: '30-45° angle, targets upper chest.', yt: 'dumbbell incline press' },
+  push_cable_fly: { name: 'Cable Chest Fly', req: ['cable_machine'], muscles: ['chest'], level: 1, icon: '🔀', sets: { b: '3×12', i: '4×12', a: '4×12' }, cue: 'Mid-pulley, squeeze chest in hugging arc.', yt: 'cable chest fly' },
+  push_chest_fly_mach: { name: 'Chest Fly Machine', req: ['chest_fly'], muscles: ['chest'], level: 1, icon: '🔁', sets: { b: '3×12', i: '3×15', a: '4×12' }, cue: 'Controlled arc, squeeze at front.', yt: 'pec deck fly machine' },
+  push_dips: { name: 'Dips', req: ['dip_bar', 'rings'], muscles: ['chest'], level: 2, icon: '📐', sets: { b: '3×6', i: '3×10', a: '4×12' }, cue: 'Lean forward for chest, stay upright for triceps.', yt: 'dips how to chest' },
+  push_pushup: { name: 'Push-ups', req: ['yoga_mat'], muscles: ['chest'], level: 1, icon: '✊', sets: { b: '3×10', i: '3×15', a: '3×max' }, cue: 'Body straight, elbows 45°, chest to floor.', yt: 'push up form' },
+  push_smith_bench: { name: 'Smith Machine Press', req: ['smith_machine'], muscles: ['chest'], level: 1, icon: '🏗️', sets: { b: '3×10', i: '4×8', a: '4×6' }, cue: 'Fixed bar path — focus on feel over weight.', yt: 'smith machine bench press' },
+  push_trx_pushup: { name: 'TRX Push-up', req: ['trx'], muscles: ['chest'], level: 2, icon: '🪢', sets: { b: '3×10', i: '3×12', a: '3×max' }, cue: 'Handles at chest height, instability = more core.', yt: 'TRX push up' },
+  // PUSH - SHOULDER
+  push_db_shoulder: { name: 'DB Shoulder Press', req: ['dumbbells'], muscles: ['shoulders'], level: 1, icon: '🔝', sets: { b: '3×10', i: '4×10', a: '4×8' }, cue: 'Press overhead, stop just before lockout.', yt: 'dumbbell shoulder press' },
+  push_lateral_raise: { name: 'Lateral Raises', req: ['dumbbells', 'resistance_bands'], muscles: ['shoulders'], level: 1, icon: '↔️', sets: { b: '3×12', i: '3×15', a: '4×15' }, cue: 'Lead with elbows, raise to shoulder height.', yt: 'lateral raise how to' },
+  push_cable_lateral: { name: 'Cable Lateral Raise', req: ['cable_machine'], muscles: ['shoulders'], level: 1, icon: '↔️', sets: { b: '3×12', i: '3×15', a: '3×15' }, cue: 'Cross-body cable keeps constant tension.', yt: 'cable lateral raise' },
+  push_front_raise: { name: 'Front Raises', req: ['dumbbells', 'barbell'], muscles: ['shoulders'], level: 1, icon: '⬆️', sets: { b: '3×12', i: '3×12', a: '3×12' }, cue: 'Raise to eye level, control descent.', yt: 'front raise how to' },
+  push_face_pull_cable: { name: 'Cable Face Pull', req: ['cable_machine'], muscles: ['shoulders'], level: 1, icon: '🎯', sets: { b: '3×15', i: '3×15', a: '4×15' }, cue: 'Rope to face, elbows OUT and back. Essential for shoulder health.', yt: 'cable face pull' },
+  push_band_face_pull: { name: 'Band Face Pull', req: ['resistance_bands'], muscles: ['shoulders'], level: 1, icon: '🌀', sets: { b: '3×15', i: '3×15', a: '3×15' }, cue: 'Anchor band at eye level, pull apart toward face.', yt: 'resistance band face pull' },
+  // PUSH - TRICEP
+  push_tricep_ext: { name: 'Tricep Overhead Extension', req: ['dumbbells', 'ez_bar'], muscles: ['triceps'], level: 1, icon: '💪', sets: { b: '3×12', i: '3×12', a: '4×10' }, cue: 'Upper arms still, extend from elbow only.', yt: 'overhead tricep extension' },
+  push_cable_pushdown: { name: 'Cable Tricep Pushdown', req: ['cable_machine'], muscles: ['triceps'], level: 1, icon: '⬇️', sets: { b: '3×12', i: '3×12', a: '4×10' }, cue: 'Elbows pinned to sides, push to full extension.', yt: 'cable tricep pushdown' },
+  push_skull_crusher: { name: 'Skull Crushers', req: ['barbell', 'dumbbells', 'ez_bar'], muscles: ['triceps'], level: 2, icon: '💀', sets: { b: '3×10', i: '3×12', a: '4×10' }, cue: 'Lower bar to forehead, extend from elbow only.', yt: 'skull crushers how to' },
+  push_band_tricep: { name: 'Band Tricep Pushdown', req: ['resistance_bands'], muscles: ['triceps'], level: 1, icon: '🌀', sets: { b: '3×15', i: '3×15', a: '3×15' }, cue: 'Anchor band overhead, push down to full extension.', yt: 'resistance band tricep pushdown' },
+  // PULL - BACK
+  pull_barbell_row: { name: 'Barbell Bent-over Row', req: ['barbell'], muscles: ['back'], level: 2, icon: '🏋️', sets: { b: '3×8', i: '4×8', a: '4×6' }, cue: 'Hinge to 45°, pull to lower chest, squeeze blades.', yt: 'barbell row form' },
+  pull_db_row: { name: 'Single-arm DB Row', req: ['dumbbells', 'bench'], muscles: ['back'], level: 1, icon: '💪', sets: { b: '3×10', i: '3×10', a: '4×8' }, cue: 'Pull elbow back toward hip, full stretch at bottom.', yt: 'dumbbell row how to' },
+  pull_cable_row: { name: 'Seated Cable Row', req: ['cable_machine'], muscles: ['back'], level: 1, icon: '🔀', sets: { b: '3×10', i: '4×10', a: '4×8' }, cue: 'Sit tall, pull to belly, squeeze shoulder blades.', yt: 'cable row form' },
+  pull_lat_pulldown: { name: 'Lat Pulldown', req: ['lat_pulldown', 'cable_machine'], muscles: ['back'], level: 1, icon: '⬇️', sets: { b: '3×10', i: '4×10', a: '4×8' }, cue: 'Pull to upper chest, elbows drive DOWN and back.', yt: 'lat pulldown form' },
+  pull_pullup: { name: 'Pull-ups', req: ['pullup_bar', 'rings'], muscles: ['back'], level: 2, icon: '🔝', sets: { b: '3×max', i: '4×6', a: '4×10' }, cue: 'Dead hang to chin over bar. Quality over quantity.', yt: 'pull up form' },
+  pull_trx_row: { name: 'TRX Row', req: ['trx'], muscles: ['back'], level: 1, icon: '🪢', sets: { b: '3×12', i: '4×12', a: '4×12' }, cue: 'Lean back, pull chest to hands, squeeze blades.', yt: 'TRX row how to' },
+  pull_landmine_row: { name: 'Landmine Row', req: ['landmine', 'barbell'], muscles: ['back'], level: 2, icon: '🔩', sets: { b: '3×10', i: '3×10', a: '4×8' }, cue: 'Hinge forward, row to hip, natural arc of movement.', yt: 'landmine row' },
+  pull_band_row: { name: 'Resistance Band Row', req: ['resistance_bands'], muscles: ['back'], level: 1, icon: '🌀', sets: { b: '3×15', i: '3×15', a: '3×15' }, cue: 'Anchor band low, row elbows back, squeeze blades.', yt: 'resistance band row' },
+  // PULL - BICEP
+  pull_barbell_curl: { name: 'Barbell Curl', req: ['barbell', 'ez_bar'], muscles: ['biceps'], level: 1, icon: '💪', sets: { b: '3×10', i: '3×12', a: '4×10' }, cue: 'Strict form — no swinging. Squeeze at top.', yt: 'barbell curl form' },
+  pull_db_curl: { name: 'Dumbbell Curl', req: ['dumbbells'], muscles: ['biceps'], level: 1, icon: '💪', sets: { b: '3×12', i: '3×12', a: '4×10' }, cue: 'Alternate or simultaneous, supinate wrist at top.', yt: 'dumbbell curl form' },
+  pull_hammer_curl: { name: 'Hammer Curls', req: ['dumbbells'], muscles: ['biceps'], level: 1, icon: '🔨', sets: { b: '3×12', i: '3×12', a: '4×10' }, cue: 'Neutral grip, builds brachialis and forearms too.', yt: 'hammer curl how to' },
+  pull_cable_curl: { name: 'Cable Bicep Curl', req: ['cable_machine'], muscles: ['biceps'], level: 1, icon: '💪', sets: { b: '3×12', i: '3×12', a: '4×10' }, cue: 'Constant tension at bottom unlike free weights.', yt: 'cable bicep curl' },
+  pull_trx_curl: { name: 'TRX Bicep Curl', req: ['trx'], muscles: ['biceps'], level: 1, icon: '🪢', sets: { b: '3×12', i: '3×12', a: '3×12' }, cue: 'Face anchor, palms up, curl to forehead. Keep elbows high.', yt: 'TRX bicep curl' },
+  pull_band_curl: { name: 'Band Bicep Curl', req: ['resistance_bands'], muscles: ['biceps'], level: 1, icon: '🌀', sets: { b: '3×15', i: '3×15', a: '3×15' }, cue: 'Stand on band, curl up with strict form.', yt: 'resistance band bicep curl' },
+  // LEGS - QUAD
+  leg_barbell_squat: { name: 'Barbell Back Squat', req: ['barbell', 'squat_rack'], muscles: ['quads'], level: 2, icon: '🏋️', sets: { b: '3×8', i: '4×8', a: '5×5' }, cue: 'Sit back and down, chest up, knees track toes.', yt: 'barbell squat form' },
+  leg_goblet_squat: { name: 'Goblet Squat', req: ['kettlebells', 'dumbbells'], muscles: ['quads'], level: 1, icon: '🏺', sets: { b: '3×12', i: '3×15', a: '4×12' }, cue: 'Hold weight at chest, squat deep, elbows push knees out.', yt: 'goblet squat how to' },
+  leg_db_lunge: { name: 'Dumbbell Lunges', req: ['dumbbells'], muscles: ['quads'], level: 1, icon: '👣', sets: { b: '3×10', i: '3×12', a: '4×10' }, cue: 'Step forward, lower back knee. Front shin vertical.', yt: 'dumbbell lunge' },
+  leg_smith_squat: { name: 'Smith Machine Squat', req: ['smith_machine'], muscles: ['quads'], level: 1, icon: '🏗️', sets: { b: '3×10', i: '4×10', a: '4×8' }, cue: 'Feet slightly forward, controlled descent.', yt: 'smith machine squat' },
+  leg_leg_press: { name: 'Leg Press', req: ['leg_press'], muscles: ['quads'], level: 1, icon: '🦵', sets: { b: '3×12', i: '4×12', a: '4×10' }, cue: 'Full range, do not lock out at top. Feet shoulder-width.', yt: 'leg press how to' },
+  leg_bodyweight_squat: { name: 'Bodyweight Squat', req: ['yoga_mat'], muscles: ['quads'], level: 1, icon: '🧎', sets: { b: '3×15', i: '3×20', a: '3×25' }, cue: 'Perfect form first — depth before weight.', yt: 'bodyweight squat form' },
+  leg_split_squat: { name: 'Bulgarian Split Squat', req: ['dumbbells', 'bench'], muscles: ['quads'], level: 2, icon: '🦵', sets: { b: '3×8', i: '3×10', a: '4×10' }, cue: 'Rear foot elevated, drop straight down. Brutal for quads.', yt: 'bulgarian split squat' },
+  leg_step_up: { name: 'DB Step-ups', req: ['dumbbells', 'bench'], muscles: ['quads'], level: 1, icon: '⬆️', sets: { b: '3×10', i: '3×12', a: '4×10' }, cue: 'Drive through front heel, controlled step down.', yt: 'dumbbell step up' },
+  // LEGS - POSTERIOR
+  leg_rdl: { name: 'Romanian Deadlift', req: ['barbell', 'dumbbells'], muscles: ['hamstrings'], level: 1, icon: '🔻', sets: { b: '3×10', i: '3×10', a: '4×8' }, cue: 'Hinge at hips, push them BACK. Feel hamstring stretch.', yt: 'romanian deadlift form' },
+  leg_kb_swing: { name: 'Kettlebell Swings', req: ['kettlebells'], muscles: ['hamstrings'], level: 1, icon: '🏺', sets: { b: '3×15', i: '3×20', a: '4×20' }, cue: 'Hip hinge NOT a squat. Hips drive the bell, not arms.', yt: 'kettlebell swing how to' },
+  leg_hip_thrust: { name: 'Hip Thrust', req: ['barbell', 'bench'], muscles: ['glutes'], level: 1, icon: '⬆️', sets: { b: '3×12', i: '4×12', a: '4×10' }, cue: 'Upper back on bench, drive hips up, squeeze hard at top.', yt: 'barbell hip thrust' },
+  leg_nordic_curl: { name: 'Nordic Curl', req: ['hyper_extension'], muscles: ['hamstrings'], level: 2, icon: '⚡', sets: { b: '3×5', i: '3×6', a: '4×8' }, cue: 'Slow eccentric lower — use hands to catch. Best hamstring exercise.', yt: 'nordic hamstring curl' },
+  leg_cable_rdl: { name: 'Cable Pull-through', req: ['cable_machine'], muscles: ['glutes'], level: 1, icon: '🔀', sets: { b: '3×15', i: '3×15', a: '4×12' }, cue: 'Low pulley, stand facing away. Hip hinge with constant tension.', yt: 'cable pull through' },
+  leg_leg_curl: { name: 'Leg Curl Machine', req: ['leg_curl'], muscles: ['hamstrings'], level: 1, icon: '🦵', sets: { b: '3×12', i: '3×12', a: '4×10' }, cue: 'Full range of motion, squeeze at top.', yt: 'leg curl machine' },
+  leg_freak_hip: { name: 'Hip Thrust (Hyper Pro)', req: ['hyper_extension', 'barbell'], muscles: ['glutes'], level: 1, icon: '⚡', sets: { b: '3×12', i: '4×12', a: '4×10' }, cue: 'Set up on Hyper Pro surface, barbell across hips. Squeeze at top.', yt: 'hip thrust how to' },
+  leg_rev_hyper: { name: 'Reverse Hyper', req: ['reverse_hyper'], muscles: ['hamstrings'], level: 1, icon: '🔄', sets: { b: '3×12', i: '3×15', a: '4×15' }, cue: 'Decompress spine while building posterior chain. Keep it controlled.', yt: 'reverse hyperextension' },
+  // CORE
+  core_plank: { name: 'Plank', req: ['yoga_mat'], muscles: ['core'], level: 1, icon: '🔲', sets: { b: '3×30s', i: '3×60s', a: '4×60s' }, cue: 'Body straight, brace abs and glutes. Do not let hips sag.', yt: 'plank form' },
+  core_dead_bug: { name: 'Dead Bug', req: ['yoga_mat'], muscles: ['core'], level: 1, icon: '🐛', sets: { b: '3×8', i: '3×10', a: '3×12' }, cue: 'Press lower back to floor. Lower opposite arm and leg slowly.', yt: 'dead bug exercise' },
+  core_leg_raise: { name: 'Leg Raises', req: ['yoga_mat', 'pullup_bar'], muscles: ['core'], level: 1, icon: '🦵', sets: { b: '3×10', i: '3×15', a: '3×15' }, cue: 'Slow controlled descent. Lower back stays down.', yt: 'leg raise how to' },
+  core_cable_crunch: { name: 'Cable Crunch', req: ['cable_machine'], muscles: ['core'], level: 1, icon: '⚡', sets: { b: '3×12', i: '3×15', a: '4×15' }, cue: 'Kneel at cable, crunch DOWN with abs not arms.', yt: 'cable crunch how to' },
+  core_ab_wheel: { name: 'Ab Wheel Rollout', req: ['ab_wheel'], muscles: ['core'], level: 2, icon: '⚙️', sets: { b: '3×8', i: '3×10', a: '4×12' }, cue: 'Keep core tight, do not let hips sag as you extend.', yt: 'ab wheel rollout' },
+  core_mountain_climber: { name: 'Mountain Climbers', req: ['yoga_mat'], muscles: ['core'], level: 1, icon: '🏔️', sets: { b: '3×20s', i: '3×30s', a: '3×45s' }, cue: 'Fast pace, hips LOW. Drive knees to chest alternately.', yt: 'mountain climbers' },
+  core_trx_fallout: { name: 'TRX Fallout', req: ['trx'], muscles: ['core'], level: 2, icon: '🪢', sets: { b: '3×8', i: '3×10', a: '4×10' }, cue: 'Standing ab wheel. Arms extend overhead, body stays rigid.', yt: 'TRX fallout' },
+  core_trx_pike: { name: 'TRX Pike / Knee Tuck', req: ['trx'], muscles: ['core'], level: 2, icon: '🪢', sets: { b: '3×10', i: '3×12', a: '4×12' }, cue: 'Feet in straps. Pike: lift hips. Knee tuck: pull knees to chest.', yt: 'TRX pike knee tuck' },
+  core_ghd: { name: 'GHD Sit-up', req: ['hyper_extension'], muscles: ['core'], level: 2, icon: '⚡', sets: { b: '3×10', i: '3×12', a: '4×15' }, cue: 'Decline angle. Lower slow (3 counts), rise with abs. Build range gradually.', yt: 'GHD sit up' },
+  core_woodchop: { name: 'Cable Woodchop', req: ['cable_machine'], muscles: ['core'], level: 1, icon: '🌀', sets: { b: '3×12', i: '3×12', a: '3×12' }, cue: 'Rotate from core, not arms. High to low or low to high.', yt: 'cable woodchop' },
+  core_situp_decline: { name: 'Decline Sit-up', req: ['hyper_extension', 'incline_bench'], muscles: ['core'], level: 1, icon: '⚡', sets: { b: '3×12', i: '3×15', a: '4×15' }, cue: 'Slow eccentric, full range. Add weight for progression.', yt: 'decline sit up' },
+  // CARDIO
+  cardio_treadmill: { name: 'Treadmill LISS', req: ['treadmill'], muscles: ['cardio'], level: 1, icon: '🏃', sets: { b: '20min', i: '30min', a: '40min' }, cue: '60-70% max HR. Conversational pace. Fat burning zone.', yt: 'LISS cardio treadmill' },
+  cardio_bike: { name: 'Stationary Bike LISS', req: ['bike'], muscles: ['cardio'], level: 1, icon: '🚴', sets: { b: '20min', i: '30min', a: '40min' }, cue: 'Moderate resistance, steady effort. 120-140 bpm.', yt: 'stationary bike cardio' },
+  cardio_rower: { name: 'Rowing Machine LISS', req: ['rower'], muscles: ['cardio'], level: 1, icon: '🚣', sets: { b: '15min', i: '25min', a: '30min' }, cue: 'Legs → body → arms. 18-22 strokes per minute.', yt: 'rowing machine cardio' },
+  cardio_jump_rope: { name: 'Jump Rope', req: ['jump_rope'], muscles: ['cardio'], level: 1, icon: '🪃', sets: { b: '5min', i: '10min', a: '15min' }, cue: 'Land softly on balls of feet. Wrists do the work.', yt: 'jump rope how to' },
+  cardio_sprint: { name: 'Sprint Intervals', req: ['treadmill', 'rower', 'bike'], muscles: ['cardio'], level: 1, icon: '⚡', sets: { b: '6rounds', i: '8rounds', a: '10rounds' }, cue: '30s max / 90s easy. Full recovery between sprints.', yt: 'sprint interval training' },
+  cardio_kb_circuit: { name: 'KB Circuit HIIT', req: ['kettlebells'], muscles: ['cardio'], level: 1, icon: '🏺', sets: { b: '3rounds', i: '4rounds', a: '5rounds' }, cue: 'Swings, goblet squats, cleans. 40s on / 20s off.', yt: 'kettlebell HIIT workout' },
+  cardio_bodyweight_hiit: { name: 'Bodyweight HIIT', req: ['yoga_mat'], muscles: ['cardio'], level: 1, icon: '✊', sets: { b: '3rounds', i: '4rounds', a: '5rounds' }, cue: 'Burpees, squat jumps, mountain climbers. Max effort.', yt: 'bodyweight HIIT workout' },
+  cardio_battle_ropes: { name: 'Battle Rope Intervals', req: ['battle_ropes'], muscles: ['cardio'], level: 1, icon: '🌊', sets: { b: '3×20s', i: '4×30s', a: '5×30s' }, cue: 'Alternating waves, stay low. Drive from hips.', yt: 'battle ropes how to' },
+  cardio_elliptical: { name: 'Elliptical', req: ['elliptical'], muscles: ['cardio'], level: 1, icon: '🔁', sets: { b: '20min', i: '30min', a: '40min' }, cue: 'Low impact, good for recovery days. Vary resistance.', yt: 'elliptical workout' },
+}
