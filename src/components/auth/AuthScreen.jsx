@@ -36,7 +36,7 @@ export default function AuthScreen() {
         </header>
 
         <div className="card">
-          <button onClick={onGoogle} disabled={busy} style={{ width: '100%', marginBottom: 12, background: '#fff', color: '#000' }}>
+          <button onClick={onGoogle} disabled={busy} style={{ width: '100%', marginBottom: 12, background: '#fff', color: '#1a1a1a', border: '1.5px solid var(--border)' }}>
             Continue with Google
           </button>
 

@@ -88,7 +88,7 @@ export default function ExerciseItem({ exercise, dateKey, showSectionBadge }) {
           width: 24, height: 24, borderRadius: '50%',
           border: `2px solid ${done ? 'var(--accent)' : 'var(--border)'}`,
           background: done ? 'var(--accent)' : 'var(--surface)',
-          color: '#0a0a0a',
+          color: '#fff',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: 13, flexShrink: 0,
         }}>

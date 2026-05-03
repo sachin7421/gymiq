@@ -1,18 +1,18 @@
 :root {
-  --bg: #0a0a0a;
-  --surface: #111111;
-  --surface2: #1a1a1a;
-  --border: #2a2a2a;
-  --text: #f0f0eb;
-  --text2: #c8c8c0;
-  --muted: #666660;
-  --accent: #c8f135;
+  --bg: #f5f5f0;
+  --surface: #ffffff;
+  --surface2: #f0f0eb;
+  --border: #e0e0d8;
+  --text: #1a1a1a;
+  --text2: #444444;
+  --muted: #888888;
+  --accent: #2a7d4f;
   --accent2: #e05c1a;
-  --accent3: #c47a00;
-  --accent-light: #1a2a0a;
-  --success: #2a7d4f;
+  --accent3: #1a6fa8;
+  --accent-light: #e8f5ee;
+  --success: #1a7a3a;
   --warn: #c47a00;
-  --danger: #c0392b;
+  --danger: #cc2222;
 
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -53,7 +53,7 @@ button {
   border: none;
   -webkit-appearance: none;
   background: var(--accent);
-  color: #0a0a0a;
+  color: #ffffff;
   border-radius: var(--radius-input);
   padding: 10px 18px;
   font-size: 14px;
@@ -103,6 +103,7 @@ input::placeholder { color: var(--muted); }
   border-radius: var(--radius-card);
   padding: 18px;
   margin-bottom: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
 .card-title {

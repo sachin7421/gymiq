@@ -86,7 +86,7 @@ export default function HabitChecklist() {
                 width: 22, height: 22, borderRadius: 6,
                 border: `2px solid ${on ? 'var(--accent)' : 'var(--border)'}`,
                 background: on ? 'var(--accent)' : 'var(--surface)',
-                color: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: 12, flexShrink: 0,
               }}>
                 {on ? '✓' : ''}
