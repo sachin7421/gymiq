@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './hooks/useAuth.js'
 import { UserDataProvider, useUserDataContext } from './contexts/UserDataContext.jsx'
@@ -7,8 +8,10 @@ import BottomNav from './components/shared/BottomNav.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import Workouts from './pages/Workouts.jsx'
 import Plan from './pages/Plan.jsx'
-import History from './pages/History.jsx'
 import Settings from './pages/Settings.jsx'
+
+// History pulls in recharts — lazy-load so it doesn't bloat initial page.
+const History = lazy(() => import('./pages/History.jsx'))
 
 function Loading({ label = 'LOADING…' }) {
   return (
@@ -31,7 +34,7 @@ function AuthedShell() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/workouts" element={<Workouts />} />
           <Route path="/plan" element={<Plan />} />
-          <Route path="/history" element={<History />} />
+          <Route path="/history" element={<Suspense fallback={<Loading label="LOADING HISTORY…" />}><History /></Suspense>} />
           <Route path="/settings" element={<Settings />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
