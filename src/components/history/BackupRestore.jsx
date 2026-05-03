@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { useUserDataContext } from '../../contexts/UserDataContext.jsx'
 import { DEFAULT_STATE, EPHEMERAL_KEYS } from '../../lib/state.js'
 import { todayStr } from '../../lib/dateUtils.js'
+import { generateWorkouts } from '../../lib/workoutGenerator.js'
 
 function strip(state) {
   const out = { ...state }
@@ -35,7 +36,14 @@ export default function BackupRestore() {
         const parsed = JSON.parse(ev.target.result)
         if (!parsed.startDate) throw new Error('Not a valid GymIQ backup')
         if (!window.confirm('Import this backup? Replaces current data.')) return
-        setState({ ...DEFAULT_STATE, ...parsed })
+        const merged = { ...DEFAULT_STATE, ...parsed, onboardingComplete: true }
+        // Regenerate workouts from imported equipment/days/level — never trust the saved value.
+        merged.generatedWorkouts = generateWorkouts(
+          merged.equipment || [],
+          merged.trainingDays || 4,
+          merged.fitnessLevel || 'intermediate',
+        )
+        setState(merged)
         setMsg({ ok: true, text: '✅ Imported — syncing…' })
         setTimeout(() => flushSave(), 200)
       } catch (err) {
