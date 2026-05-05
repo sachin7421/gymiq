@@ -4,6 +4,7 @@ import { DEFAULT_STATE, EPHEMERAL_KEYS } from '../lib/state.js'
 import { mergeStates } from '../lib/mergeStates.js'
 import { generateWorkouts } from '../lib/workoutGenerator.js'
 import { localDateStr } from '../lib/dateUtils.js'
+import { validateState } from '../lib/stateSchema.js'
 
 const SAVE_DEBOUNCE_MS = 1500
 const LS_KEY = 'gymiqState'
@@ -101,8 +102,24 @@ export function useUserData(userId) {
           .maybeSingle()
         if (dbErr) throw dbErr
 
-        const cloud = data?.data || null
-        const local = loadLocalState()
+        const rawCloud = data?.data || null
+        const rawLocal = loadLocalState()
+
+        // Validate before merging — rejects malformed blobs so they can't
+        // overwrite a clean local state. On schema failure we log and fall
+        // back to whichever source is healthy (or defaults).
+        const cloud = (() => {
+          if (!rawCloud) return null
+          const v = validateState(rawCloud)
+          if (!v.ok) console.warn('Cloud state failed validation:', v.error)
+          return v.ok ? v.data : null
+        })()
+        const local = (() => {
+          if (!rawLocal) return null
+          const v = validateState(rawLocal)
+          if (!v.ok) console.warn('Local state failed validation:', v.error)
+          return v.ok ? v.data : null
+        })()
 
         let merged
         if (cloud && local) merged = mergeStates(local, cloud)

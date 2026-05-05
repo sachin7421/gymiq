@@ -54,6 +54,10 @@ export const DEFAULT_STATE = {
   completedWorkouts: {},
   exerciseDone: {},
   exerciseWeights: {},
+  // setLog[dateKey][exerciseId] = [{ weight, reps, rpe, ts }]
+  // Source of truth for per-set history. exerciseWeights/exerciseDone are
+  // legacy mirrors kept in sync for any UI still reading them.
+  setLog: {},
   currentRoutine: 'A',
   viewDow: null,
 

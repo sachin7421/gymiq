@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
 import { useUserDataContext } from '../../contexts/UserDataContext.jsx'
-import { todayStr } from '../../lib/dateUtils.js'
+import { isExerciseDone } from '../../lib/setLog.js'
+import SetLogger from './SetLogger.jsx'
 
 const SECTION_BADGE = {
   warmup: { label: 'Warm-up', color: 'var(--accent3)' },
@@ -12,13 +12,8 @@ const SECTION_BADGE = {
 
 export default function ExerciseItem({ exercise, dateKey, showSectionBadge }) {
   const { state, setState } = useUserDataContext()
-  const done = !!state.exerciseDone?.[dateKey]?.[exercise.id]
-  const stored = state.exerciseWeights?.[exercise.id]
-  const [weight, setWeight] = useState(stored?.weight ?? '')
-
-  useEffect(() => {
-    setWeight(stored?.weight ?? '')
-  }, [stored?.weight, exercise.id])
+  const done = isExerciseDone(state, dateKey, exercise.id)
+  const trackable = exercise.hasWeight || exercise.type === 'strength' || exercise.type === 'cardio' || exercise.type === 'core'
 
   function toggleDone() {
     setState(prev => {
@@ -31,19 +26,6 @@ export default function ExerciseItem({ exercise, dateKey, showSectionBadge }) {
         },
       }
     })
-  }
-
-  function saveWeight() {
-    const val = parseFloat(weight)
-    if (!val || val <= 0) return
-    if (stored?.weight === val) return
-    setState(prev => ({
-      ...prev,
-      exerciseWeights: {
-        ...(prev.exerciseWeights || {}),
-        [exercise.id]: { date: todayStr(), weight: val, prev: stored?.weight ?? null },
-      },
-    }))
   }
 
   const badge = SECTION_BADGE[exercise.type]
@@ -108,7 +90,7 @@ export default function ExerciseItem({ exercise, dateKey, showSectionBadge }) {
         </p>
       )}
 
-      <div style={{ padding: '0 14px 12px', display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+      <div style={{ padding: '0 14px 8px' }}>
         <a
           href={yt}
           target="_blank"
@@ -128,42 +110,9 @@ export default function ExerciseItem({ exercise, dateKey, showSectionBadge }) {
         >
           ▶ Watch
         </a>
-
-        {exercise.hasWeight && (
-          <>
-            <input
-              type="number"
-              inputMode="decimal"
-              step="2.5"
-              placeholder="lbs"
-              value={weight}
-              onChange={e => setWeight(e.target.value)}
-              onBlur={saveWeight}
-              onKeyDown={e => e.key === 'Enter' && (e.target.blur(), saveWeight())}
-              style={{ flex: '0 0 110px', padding: '8px 12px', fontSize: 13 }}
-            />
-            <button
-              type="button"
-              onClick={saveWeight}
-              className="orange sm"
-              style={{ padding: '8px 14px' }}
-            >
-              Save
-            </button>
-            {stored?.prev != null && stored?.weight != null && (
-              <span style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 11,
-                color: stored.weight > stored.prev ? 'var(--accent)' : stored.weight < stored.prev ? 'var(--accent2)' : 'var(--muted)',
-              }}>
-                {stored.weight > stored.prev ? `↑ +${(stored.weight - stored.prev).toFixed(1)}` :
-                 stored.weight < stored.prev ? `↓ -${(stored.prev - stored.weight).toFixed(1)}` :
-                 '= prev'}
-              </span>
-            )}
-          </>
-        )}
       </div>
+
+      {trackable && <SetLogger exercise={exercise} dateKey={dateKey} />}
     </div>
   )
 }

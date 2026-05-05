@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useUserDataContext } from '../contexts/UserDataContext.jsx'
 import { signOut } from '../hooks/useAuth.js'
+import { supabase } from '../lib/supabase.js'
 import EquipmentGrid from '../components/settings/EquipmentGrid.jsx'
 import { generateWorkouts } from '../lib/workoutGenerator.js'
 import { testOuraToken } from '../lib/oura.js'
+import { todayStr } from '../lib/dateUtils.js'
 
 export default function Settings() {
   const { state, setState } = useUserDataContext()
@@ -77,6 +79,37 @@ export default function Settings() {
 
   function rerunWizard() {
     setState(prev => ({ ...prev, onboardingComplete: false }))
+  }
+
+  function exportData() {
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `gymiq-export-${todayStr()}.json`
+    document.body.appendChild(a)
+    a.click()
+    a.remove()
+    URL.revokeObjectURL(url)
+  }
+
+  async function deleteAccount() {
+    const confirmed = window.confirm(
+      'This permanently deletes your GymIQ data and signs you out. Continue?'
+    )
+    if (!confirmed) return
+    const second = window.prompt('Type "delete" to confirm.')
+    if (second?.trim().toLowerCase() !== 'delete') return
+    try {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (user) {
+        await supabase.from('user_data').delete().eq('id', user.id)
+      }
+      try { localStorage.removeItem('gymiqState') } catch { /* noop */ }
+      await signOut()
+    } catch (e) {
+      window.alert('Delete failed: ' + (e.message || e))
+    }
   }
 
   return (
@@ -174,8 +207,19 @@ export default function Settings() {
         <p className="card-title">Other</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <button className="secondary" onClick={rerunWizard}>Re-run setup wizard</button>
-          <button className="danger" onClick={() => signOut()}>Sign out</button>
+          <button className="secondary" onClick={exportData}>Download my data (JSON)</button>
+          <button className="secondary" onClick={() => signOut()}>Sign out</button>
         </div>
+      </div>
+
+      <div className="card">
+        <p className="card-title">Danger zone</p>
+        <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 8, lineHeight: 1.4 }}>
+          Permanently delete your GymIQ data. Your auth account remains — re-signing in starts you fresh.
+        </p>
+        <button className="danger" onClick={deleteAccount} style={{ width: '100%' }}>
+          Delete my data
+        </button>
       </div>
     </>
   )
