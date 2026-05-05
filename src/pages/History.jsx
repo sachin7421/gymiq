@@ -2,6 +2,7 @@ import { useUserDataContext } from '../contexts/UserDataContext.jsx'
 import WeightChart from '../components/history/WeightChart.jsx'
 import WeeklyScorecard from '../components/history/WeeklyScorecard.jsx'
 import LiftingLog from '../components/history/LiftingLog.jsx'
+import E1RMTrend from '../components/history/E1RMTrend.jsx'
 import BadgeCollection from '../components/history/BadgeCollection.jsx'
 import BackupRestore from '../components/history/BackupRestore.jsx'
 import { daysSinceStart } from '../lib/dateUtils.js'
@@ -51,6 +52,7 @@ export default function History() {
       </div>
 
       <WeeklyScorecard />
+      <E1RMTrend />
       <LiftingLog />
       <BadgeCollection />
       <BackupRestore />
