@@ -18,6 +18,7 @@ export default function Settings() {
   const [tokenInput, setTokenInput] = useState(state.ouraToken || '')
   const [tokenStatus, setTokenStatus] = useState(null)
   const [tokenTesting, setTokenTesting] = useState(false)
+  const [coachKey, setCoachKey] = useState(state.anthropicKey || '')
 
   function saveProfile() {
     const sw = parseFloat(profile.startWeight) || 0
@@ -79,6 +80,15 @@ export default function Settings() {
 
   function rerunWizard() {
     setState(prev => ({ ...prev, onboardingComplete: false }))
+  }
+
+  function saveCoachKey() {
+    const trimmed = coachKey.trim()
+    setState(prev => ({ ...prev, anthropicKey: trimmed || null }))
+  }
+  function clearCoachKey() {
+    setCoachKey('')
+    setState(prev => ({ ...prev, anthropicKey: null }))
   }
 
   function exportData() {
@@ -200,6 +210,36 @@ export default function Settings() {
               </p>
             )}
           </>
+        )}
+      </div>
+
+      <div className="card">
+        <p className="card-title">🧠 Coach (Claude API)</p>
+        <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 8, lineHeight: 1.4 }}>
+          Paste an Anthropic API key (console.anthropic.com) to enable the
+          coach. Stored only in your account. Each question costs ~$0.001.
+        </p>
+        {state.anthropicKey ? (
+          <>
+            <p style={{ fontSize: 13, color: 'var(--success)', marginBottom: 8 }}>
+              ✓ Coach enabled (key ending …{state.anthropicKey.slice(-4)})
+            </p>
+            <button onClick={clearCoachKey} className="danger" style={{ width: '100%' }}>
+              Remove key
+            </button>
+          </>
+        ) : (
+          <div style={{ display: 'flex', gap: 8 }}>
+            <input
+              type="password"
+              placeholder="sk-ant-…"
+              value={coachKey}
+              onChange={e => setCoachKey(e.target.value)}
+            />
+            <button onClick={saveCoachKey} disabled={!coachKey.trim()} className="orange" style={{ flexShrink: 0 }}>
+              Save
+            </button>
+          </div>
         )}
       </div>
 

@@ -7,6 +7,7 @@ import WeeklyChallenge from '../components/dashboard/WeeklyChallenge.jsx'
 import HabitChecklist from '../components/dashboard/HabitChecklist.jsx'
 import OuraCard from '../components/dashboard/OuraCard.jsx'
 import PRCard from '../components/dashboard/PRCard.jsx'
+import CoachCard from '../components/dashboard/CoachCard.jsx'
 import { daysSinceStart } from '../lib/dateUtils.js'
 
 export default function Dashboard() {
@@ -25,6 +26,7 @@ export default function Dashboard() {
       </header>
 
       <OuraCard />
+      <CoachCard />
       <LevelBanner />
       <WeeklyChallenge />
       <PRCard />

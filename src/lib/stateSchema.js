@@ -37,6 +37,7 @@ export const StateSchema = z.object({
   hasOura: z.boolean().optional(),
   ouraToken: z.string().nullable().optional(),
   wearable: z.string().optional(),
+  anthropicKey: z.string().nullable().optional(),
 
   currentWeight: numLike.optional(),
   startWeight: numLike.optional(),

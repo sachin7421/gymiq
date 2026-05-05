@@ -12,6 +12,7 @@ export const DEFAULT_STATE = {
   hasOura: false,
   ouraToken: null,
   wearable: 'none',
+  anthropicKey: null,
 
   // Weight
   currentWeight: 0,
