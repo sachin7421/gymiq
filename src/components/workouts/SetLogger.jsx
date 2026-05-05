@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { useUserDataContext } from '../../contexts/UserDataContext.jsx'
 import { useOura } from '../../hooks/useOura.js'
 import { useRestTimer } from '../../hooks/useRestTimer.js'
+import { useVoiceInput } from '../../hooks/useVoiceInput.js'
 import { addSet, removeSet, getSets } from '../../lib/setLog.js'
 import { suggestNextWeight } from '../../lib/prescription.js'
 import { setE1RM, isPRDate } from '../../lib/strength.js'
@@ -55,6 +56,14 @@ export default function SetLogger({ exercise, dateKey, isReadOnly }) {
   )
   const [reps, setReps] = useState(() => lastToday?.reps ? String(lastToday.reps) : '')
   const [rpe, setRpe] = useState(() => lastToday?.rpe ? String(lastToday.rpe) : '')
+
+  const voice = useVoiceInput({
+    onResult: ({ parsed }) => {
+      if (parsed.weight != null) setWeight(String(parsed.weight))
+      if (parsed.reps != null) setReps(String(parsed.reps))
+      if (parsed.rpe != null) setRpe(String(parsed.rpe))
+    },
+  })
 
   function logSet() {
     const w = hasWeight ? parseFloat(weight) : 0
@@ -215,7 +224,29 @@ export default function SetLogger({ exercise, dateKey, isReadOnly }) {
           >
             + Log set
           </button>
+          {voice.supported && (
+            <button
+              type="button"
+              onClick={voice.listening ? voice.stop : voice.start}
+              className="secondary sm"
+              style={{
+                padding: '8px 12px',
+                background: voice.listening ? 'var(--accent2)' : 'var(--surface2)',
+                color: voice.listening ? '#fff' : 'var(--text)',
+                border: voice.listening ? 'none' : '1.5px solid var(--border)',
+              }}
+              aria-label="Voice input"
+              title='Try: "185 by 8 RPE 8"'
+            >
+              {voice.listening ? '● rec' : '🎤'}
+            </button>
+          )}
         </div>
+      )}
+      {voice.transcript && !voice.listening && (
+        <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 4 }}>
+          heard: "{voice.transcript}"
+        </p>
       )}
 
       {/* Plate calc */}
