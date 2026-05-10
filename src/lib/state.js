@@ -59,8 +59,18 @@ export const DEFAULT_STATE = {
   // Source of truth for per-set history. exerciseWeights/exerciseDone are
   // legacy mirrors kept in sync for any UI still reading them.
   setLog: {},
+  // Per-day-of-week goal config. When present, the goal-driven generator
+  // runs instead of the legacy schedule-based one.
+  // dayGoals[0..6] = { goal, focus? }
+  dayGoals: null,
   currentRoutine: 'A',
   viewDow: null,
+
+  // Apple Health import. healthData[dateKey] = { steps, hrv, restingHr, sleepHours, weight, ... }
+  healthData: {},
+  // Last 90d of workouts pulled from HealthKit
+  healthWorkouts: [],
+  lastHealthImport: null,
 
   // Sync
   lastSync: null,

@@ -3,6 +3,8 @@ import { useUserDataContext } from '../contexts/UserDataContext.jsx'
 import { signOut } from '../hooks/useAuth.js'
 import { supabase } from '../lib/supabase.js'
 import EquipmentGrid from '../components/settings/EquipmentGrid.jsx'
+import AppleHealthImport from '../components/settings/AppleHealthImport.jsx'
+import DayGoalsEditor from '../components/settings/DayGoalsEditor.jsx'
 import { generateWorkouts } from '../lib/workoutGenerator.js'
 import { testOuraToken } from '../lib/oura.js'
 import { todayStr } from '../lib/dateUtils.js'
@@ -185,6 +187,10 @@ export default function Settings() {
         <p style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 10 }}>Workouts regenerate when you toggle items.</p>
         <EquipmentGrid selected={state.equipment || []} onToggle={toggleEquipment} />
       </div>
+
+      <DayGoalsEditor />
+
+      <AppleHealthImport />
 
       <div className="card">
         <p className="card-title">Wearable</p>

@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase.js'
 import { DEFAULT_STATE, EPHEMERAL_KEYS } from '../lib/state.js'
 import { mergeStates } from '../lib/mergeStates.js'
 import { generateWorkouts } from '../lib/workoutGenerator.js'
+import { generateGoalDrivenWorkouts } from '../lib/goalGenerator.js'
 import { localDateStr } from '../lib/dateUtils.js'
 import { validateState } from '../lib/stateSchema.js'
 
@@ -61,11 +62,20 @@ function applyWeeklyDrinkReset(state) {
 }
 
 function regenerateWorkouts(state) {
-  state.generatedWorkouts = generateWorkouts(
-    state.equipment || [],
-    state.trainingDays || 4,
-    state.fitnessLevel || 'intermediate',
-  )
+  if (state.dayGoals && Object.keys(state.dayGoals).length > 0) {
+    state.generatedWorkouts = generateGoalDrivenWorkouts({
+      equipment: state.equipment || [],
+      fitnessLevel: state.fitnessLevel || 'intermediate',
+      dayGoals: state.dayGoals,
+      // readiness is recomputed at render time inside Workouts.jsx, not here
+    })
+  } else {
+    state.generatedWorkouts = generateWorkouts(
+      state.equipment || [],
+      state.trainingDays || 4,
+      state.fitnessLevel || 'intermediate',
+    )
+  }
   return state
 }
 

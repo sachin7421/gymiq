@@ -1,5 +1,6 @@
 import { useUserDataContext } from '../contexts/UserDataContext.jsx'
 import ExerciseItem from '../components/workouts/ExerciseItem.jsx'
+import DailyBrief from '../components/workouts/DailyBrief.jsx'
 import { localDateStr } from '../lib/dateUtils.js'
 
 const DOW_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
@@ -23,6 +24,7 @@ export default function Workouts() {
   const day = state.generatedWorkouts?.[dow]
   const exercises = day?.[routine] || []
   const completedDay = !!state.completedWorkouts?.[dateKey]
+  const dayGoal = state.dayGoals?.[dow] || null
 
   function changeDay(delta) {
     const next = ((dow + delta) % 7 + 7) % 7
@@ -58,6 +60,8 @@ export default function Workouts() {
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 4 }}>WORKOUT</p>
         <h2 style={{ fontSize: 36 }}>{day?.icon || '💪'} {day?.name || 'Loading…'}</h2>
       </header>
+
+      {isToday && <DailyBrief dayGoal={dayGoal} />}
 
       <div className="card" style={{ padding: 14 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>

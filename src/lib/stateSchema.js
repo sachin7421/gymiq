@@ -67,8 +67,15 @@ export const StateSchema = z.object({
   exerciseDone: z.record(z.string(), z.record(z.string(), z.boolean())).optional(),
   exerciseWeights: z.record(z.string(), z.any()).optional(),
   setLog: z.record(z.string(), z.record(z.string(), z.array(SetEntry))).optional(),
+  dayGoals: z.record(z.string(), z.object({
+    goal: z.string(),
+    focus: z.string().optional(),
+  })).nullable().optional(),
   currentRoutine: z.string().optional(),
   viewDow: z.number().nullable().optional(),
+  healthData: z.record(z.string(), z.record(z.string(), z.any())).optional(),
+  healthWorkouts: z.array(z.any()).optional(),
+  lastHealthImport: z.string().nullable().optional(),
 
   lastSync: z.string().nullable().optional(),
   tzMigrated: z.boolean().optional(),
