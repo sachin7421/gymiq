@@ -1,4 +1,5 @@
 import { EX_DB } from './exerciseDb.js'
+import { buildGolfRoutine } from './golfRoutine.js'
 
 const LEVEL_NUM = { beginner: 1, intermediate: 2, advanced: 3 }
 
@@ -92,6 +93,8 @@ export function generateWorkouts(equipment, trainingDays, fitnessLevel) {
     { id: 'cool_stretch', name: 'Full Body Stretch', detail: 'Hip flexors, chest, hamstrings, shoulders', icon: '🤸', type: 'cooldown', hasWeight: false, cue: 'Hold 30-45s each stretch. Focus on what was worked today.', yt: 'full body stretch' },
   ]
 
+  const golfRoutine = buildGolfRoutine(equipment, lvl)
+
   const schedule = SCHEDULES[trainingDays] || SCHEDULES[4]
   const activeDays = DOW_FOR_DAYS[trainingDays] || DOW_FOR_DAYS[4]
   const allDays = [0, 1, 2, 3, 4, 5, 6]
@@ -116,6 +119,7 @@ export function generateWorkouts(equipment, trainingDays, fitnessLevel) {
           { id: 'rest_walk', name: 'Light Walk', detail: '20–30 min', icon: '🚶', type: 'cardio', hasWeight: false, cue: 'Easy pace, fresh air.', yt: 'active recovery' },
           { id: 'cool_med', name: 'Meditation', detail: '5–10 min', icon: '🧘', type: 'cooldown', hasWeight: false, cue: 'Rest and reset.', yt: 'guided meditation' },
         ],
+        C: golfRoutine,
       }
       return
     }
@@ -165,6 +169,7 @@ export function generateWorkouts(equipment, trainingDays, fitnessLevel) {
       icon: WORKOUT_ICONS[wType] || '💪',
       A: exA.filter(Boolean),
       B: exB.filter(Boolean),
+      C: golfRoutine,
     }
   })
 

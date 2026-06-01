@@ -32,6 +32,7 @@ export default function Plan() {
           const isRest = !w || w.name === 'Rest Day'
           const aCount = (w?.A || []).filter(e => e.type === 'strength' || e.type === 'cardio').length
           const bCount = (w?.B || []).filter(e => e.type === 'strength' || e.type === 'cardio').length
+          const cCount = (w?.C || []).filter(e => ['strength', 'cardio', 'core', 'mobility'].includes(e.type)).length
           return (
             <button
               key={dow}
@@ -55,7 +56,7 @@ export default function Plan() {
                   {isToday && <span style={{ fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: 1.5, color: 'var(--accent)' }}>TODAY</span>}
                 </div>
                 <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>
-                  {DOW_SHORT[dow]}{!isRest && ` · A: ${aCount} ex · B: ${bCount} ex`}
+                  {DOW_SHORT[dow]}{!isRest && ` · A: ${aCount} ex · B: ${bCount} ex`}{cCount > 0 && ` · ⛳ ${cCount} ex`}
                 </p>
               </div>
               <span style={{ color: 'var(--muted)', fontSize: 18 }}>›</span>

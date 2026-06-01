@@ -4,6 +4,7 @@ import SetLogger from './SetLogger.jsx'
 
 const SECTION_BADGE = {
   warmup: { label: 'Warm-up', color: 'var(--accent3)' },
+  mobility: { label: 'Mobility', color: 'var(--accent)' },
   strength: { label: 'Strength', color: 'var(--accent2)' },
   core: { label: 'Core', color: 'var(--warn)' },
   cooldown: { label: 'Cool-down', color: 'var(--success)' },

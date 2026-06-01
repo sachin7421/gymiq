@@ -81,14 +81,14 @@ export default function Workouts() {
         )}
 
         <div style={{ display: 'flex', gap: 6 }}>
-          {['A', 'B'].map(r => (
+          {[['A', 'Routine A'], ['B', 'Routine B'], ['C', '⛳ Golf']].map(([r, label]) => (
             <button
               key={r}
               onClick={() => setRoutine(r)}
               className={routine === r ? '' : 'secondary'}
               style={{ flex: 1, padding: 9, fontSize: 13, fontWeight: 600 }}
             >
-              Routine {r}
+              {label}
             </button>
           ))}
         </div>

@@ -8,6 +8,7 @@
 
 import { EX_DB } from './exerciseDb.js'
 import { GOAL_DEFS, FOCUS_DEFS, DEFAULT_DAY_GOALS } from './dayGoals.js'
+import { buildGolfRoutine } from './golfRoutine.js'
 
 const LEVEL_NUM = { beginner: 1, intermediate: 2, advanced: 3 }
 
@@ -182,6 +183,7 @@ export function generateDay(eq, fitnessLevel, dayGoal, readiness, variant = 'A')
 export function generateGoalDrivenWorkouts({ equipment = [], fitnessLevel = 'intermediate', dayGoals, readiness } = {}) {
   const eq = new Set(equipment)
   const goals = dayGoals || DEFAULT_DAY_GOALS
+  const golfRoutine = buildGolfRoutine(equipment, fitnessLevel)
   const out = {}
   for (let dow = 0; dow < 7; dow++) {
     const dg = goals[dow] || { goal: 'rest' }
@@ -194,6 +196,7 @@ export function generateGoalDrivenWorkouts({ equipment = [], fitnessLevel = 'int
       icon: def.icon,
       A: generateDay(eq, fitnessLevel, dg, readiness, 'A'),
       B: generateDay(eq, fitnessLevel, dg, readiness, 'B'),
+      C: golfRoutine,
     }
   }
   return out
