@@ -181,10 +181,9 @@ Deno.serve(async (req: Request) => {
       const v = incoming[k];
       row[k] = v !== null ? v : (existing ? (existing as Record<string, unknown>)[k] : null);
     }
-    // Steps only ever go up within a day (a later sync has the fuller count).
-    if (existing?.steps != null && row.steps != null && (row.steps as number) < (existing.steps as number)) {
-      row.steps = existing.steps;
-    }
+    // Latest sync wins. Health's own daily total only grows during the day, so a
+    // later post is always the fuller (and, after a Group-by-Day fix, the
+    // deduplicated) count. Keeping max here would lock in an inflated value.
 
     const { error: upErr } = await sb.from("health_daily").upsert(row, { onConflict: "user_id,date" });
     if (upErr) return json({ error: upErr.message }, 500);
