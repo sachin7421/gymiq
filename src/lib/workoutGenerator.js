@@ -1,5 +1,6 @@
 import { EX_DB } from './exerciseDb.js'
 import { buildGolfRoutine } from './golfRoutine.js'
+import { rankPool } from './exercisePick.js'
 
 const LEVEL_NUM = { beginner: 1, intermediate: 2, advanced: 3 }
 
@@ -31,13 +32,15 @@ export function generateWorkouts(equipment, trainingDays, fitnessLevel) {
   }
 
   function getExercises(muscleGroups, count, excludeIds = []) {
-    const pool = Object.entries(EX_DB)
-      .filter(([id, ex]) =>
+    const pool = rankPool(
+      Object.entries(EX_DB).filter(([id, ex]) =>
         muscleGroups.some(m => ex.muscles.includes(m)) &&
         canDo(id) &&
         !excludeIds.includes(id)
-      )
-      .sort((a, b) => b[1].level - a[1].level)
+      ),
+      muscleGroups,
+      eq,
+    )
     return pool.slice(0, count).map(([id, ex]) => ({
       id,
       name: ex.name,

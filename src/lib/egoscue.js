@@ -10,12 +10,12 @@ export const EGOSCUE_BACK = {
   icon: '🧘',
   habitKey: 'egoscue',
   exercises: [
-    { id: 'hip_crossover', name: 'Hip Crossover Stretch — Palms Down', seconds: 60, perSide: true, link: BASE + '383.html', cue: 'Lie on your back, knees bent, arms out palms down. Let the knees fall to one side and hold.' },
-    { id: 'gluteal_squeezes', name: 'Hooklying Gluteal Squeezes', reps: 60, link: BASE + '28.html', cue: 'Knees bent, feet flat. Squeeze the glutes together and release. Count 60.' },
-    { id: 'static_back', name: 'Static Back', seconds: 300, link: BASE + '30.html', cue: 'Legs up on a chair or block at 90°. Arms out, palms up. Breathe from the belly and let the back settle.' },
-    { id: 'knee_pillow_squeezes', name: 'Static Back Knee Pillow Squeezes', seconds: 180, link: BASE + '453.html', cue: 'Same position, pillow between the knees. Squeeze and release in a steady rhythm.' },
-    { id: 'pull_overs', name: 'Static Back Pull Overs with Pillow', seconds: 180, link: BASE + '280.html', cue: 'Hold a pillow overhead with straight arms, lower it to the floor behind you and back.' },
-    { id: 'airbench', name: 'Airbench', seconds: 120, link: BASE + '27.html', cue: 'Back flat on the wall, thighs parallel, knees over ankles. Press the low back into the wall.' },
+    { id: 'hip_crossover', name: 'Hip Crossover Stretch — Palms Down', seconds: 60, perSide: true, link: BASE + '383.html', yt: 'Egoscue hip crossover stretch palms down', cue: 'Lie on your back, knees bent, arms out palms down. Let the knees fall to one side and hold.' },
+    { id: 'gluteal_squeezes', name: 'Hooklying Gluteal Squeezes', reps: 60, link: BASE + '28.html', yt: 'Egoscue hooklying gluteal squeezes', cue: 'Knees bent, feet flat. Squeeze the glutes together and release. Count 60.' },
+    { id: 'static_back', name: 'Static Back', seconds: 300, link: BASE + '30.html', yt: 'Egoscue static back', cue: 'Legs up on a chair or block at 90°. Arms out, palms up. Breathe from the belly and let the back settle.' },
+    { id: 'knee_pillow_squeezes', name: 'Static Back Knee Pillow Squeezes', seconds: 180, link: BASE + '453.html', yt: 'Egoscue static back knee pillow squeezes', cue: 'Same position, pillow between the knees. Squeeze and release in a steady rhythm.' },
+    { id: 'pull_overs', name: 'Static Back Pull Overs with Pillow', seconds: 180, link: BASE + '280.html', yt: 'Egoscue static back pullovers', cue: 'Hold a pillow overhead with straight arms, lower it to the floor behind you and back.' },
+    { id: 'airbench', name: 'Airbench', seconds: 120, link: BASE + '27.html', yt: 'Egoscue airbench', cue: 'Back flat on the wall, thighs parallel, knees over ankles. Press the low back into the wall.' },
   ],
 }
 
@@ -43,6 +43,10 @@ export function fmtDuration(ex) {
   const s = ex.seconds % 60
   const base = `${m}:${String(s).padStart(2, '0')}`
   return ex.perSide ? `${base} per side` : base
+}
+
+export function ytUrl(ex) {
+  return `https://www.youtube.com/results?search_query=${encodeURIComponent(ex.yt || ex.name)}`
 }
 
 export function fmtClock(totalSec) {

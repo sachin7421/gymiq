@@ -83,6 +83,7 @@ export const StateSchema = z.object({
 
   lastSync: z.string().nullable().optional(),
   tzMigrated: z.boolean().optional(),
+  lowerBodyMigrated: z.boolean().optional(),
 }).passthrough()
 
 // Returns { ok: true, data } on success, { ok: false, error } on failure.

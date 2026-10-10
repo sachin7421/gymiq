@@ -34,6 +34,16 @@ export const GOAL_DEFS = {
     restSec: 75,
     intensityPct: 0.75,
   },
+  hybrid: {
+    label: 'Strength + Hike',
+    icon: '🥾',
+    color: '#6b21a8',
+    desc: '20 min of compound lifts, 20 min incline treadmill hike, then stretch.',
+    sets: '3',
+    reps: '8-10',
+    restSec: 60,
+    intensityPct: 0.75,
+  },
   cardio: {
     label: 'Cardio',
     icon: '🏃',
@@ -84,53 +94,58 @@ export const FOCUS_DEFS = {
   full: { label: 'Full body', muscles: ['chest', 'shoulders', 'back', 'quads', 'hamstrings', 'glutes', 'triceps', 'biceps'] },
 }
 
-// Balanced push / pull / cardio week. Heavy compound push & pull early, a
-// dedicated cardio day, a combined upper (push+pull) volume day to finish,
-// with a mid-week rest and a weekend recovery slot. Exercise selection still
-// adapts to whatever equipment the user owns.
+// Full-body week: heavy push & pull early, a dedicated lower-body day, an
+// upper volume day, and a cardio slot on Saturday. Mid-week and Sunday rest.
+// Exercise selection still adapts to whatever equipment the user owns.
 export const DEFAULT_DAY_GOALS = {
   0: { goal: 'rest' },                          // Sun
   1: { goal: 'strength', focus: 'push' },       // Mon — Push
   2: { goal: 'strength', focus: 'pull' },       // Tue — Pull
   3: { goal: 'rest' },                          // Wed
-  4: { goal: 'cardio' },                        // Thu — Cardio
-  5: { goal: 'hypertrophy', focus: 'upper' },   // Fri — Push/Pull
-  6: { goal: 'recovery' },                      // Sat
+  4: { goal: 'strength', focus: 'lower' },      // Thu — Legs
+  5: { goal: 'hypertrophy', focus: 'upper' },   // Fri — Push/Pull volume
+  6: { goal: 'hybrid', focus: 'full' },         // Sat — Strength + Hike
 }
 
-// Balanced push / pull / cardio templates keyed by weekly training-day count.
-// Each keeps push, pull, and cardio represented; lifting days carry a push or
-// pull focus (or a combined `upper` day) and exercises are still filtered to
-// the user's available equipment by the generator.
+// Full-body templates keyed by weekly training-day count. Every template has
+// a lower-body day (squats, hinges, lunges) alongside push and pull; cardio
+// gets its own slot from 4 days up. Exercises are still filtered to the
+// user's available equipment by the generator.
 const BALANCED_TEMPLATES = {
   3: {
-    1: { goal: 'strength', focus: 'push' },     // Mon — Push
-    3: { goal: 'strength', focus: 'pull' },     // Wed — Pull
-    5: { goal: 'cardio' },                      // Fri — Cardio
+    1: { goal: 'strength', focus: 'upper' },    // Mon — Upper
+    3: { goal: 'strength', focus: 'lower' },    // Wed — Legs
+    5: { goal: 'hypertrophy', focus: 'full' },  // Fri — Full body
   },
   4: {
     1: { goal: 'strength', focus: 'push' },     // Mon — Push
     2: { goal: 'strength', focus: 'pull' },     // Tue — Pull
-    4: { goal: 'cardio' },                      // Thu — Cardio
-    5: { goal: 'hypertrophy', focus: 'upper' }, // Fri — Push/Pull
-    6: { goal: 'recovery' },                    // Sat — Recovery
+    4: { goal: 'strength', focus: 'lower' },    // Thu — Legs
+    5: { goal: 'hypertrophy', focus: 'upper' }, // Fri — Push/Pull volume
+    6: { goal: 'hybrid', focus: 'full' },       // Sat — Strength + Hike
   },
   5: {
     1: { goal: 'strength', focus: 'push' },     // Mon — Push
     2: { goal: 'strength', focus: 'pull' },     // Tue — Pull
-    3: { goal: 'cardio' },                      // Wed — Cardio
-    4: { goal: 'hypertrophy', focus: 'push' },  // Thu — Push
-    5: { goal: 'hypertrophy', focus: 'pull' },  // Fri — Pull
+    3: { goal: 'strength', focus: 'lower' },    // Wed — Legs
+    4: { goal: 'hybrid', focus: 'full' },       // Thu — Strength + Hike
+    5: { goal: 'hypertrophy', focus: 'upper' }, // Fri — Push/Pull volume
     6: { goal: 'recovery' },                    // Sat — Recovery
   },
   6: {
     1: { goal: 'strength', focus: 'push' },     // Mon — Push
     2: { goal: 'strength', focus: 'pull' },     // Tue — Pull
-    3: { goal: 'cardio' },                      // Wed — Cardio
-    4: { goal: 'hypertrophy', focus: 'push' },  // Thu — Push
-    5: { goal: 'hypertrophy', focus: 'pull' },  // Fri — Pull
-    6: { goal: 'cardio' },                      // Sat — Cardio
+    3: { goal: 'strength', focus: 'lower' },    // Wed — Legs
+    4: { goal: 'cardio' },                      // Thu — Cardio
+    5: { goal: 'hypertrophy', focus: 'upper' }, // Fri — Push/Pull volume
+    6: { goal: 'hypertrophy', focus: 'lower' }, // Sat — Legs volume
   },
+}
+
+// True when the week has no lower-body or full-body lifting day.
+export function lacksLowerBody(dayGoals) {
+  if (!dayGoals) return false
+  return !Object.values(dayGoals).some(g => g && ['lower', 'full'].includes(g.focus) && ['strength', 'hypertrophy'].includes(g.goal))
 }
 
 // Seed per-day goals from the user's training-day count, using the balanced

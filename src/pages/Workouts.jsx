@@ -23,7 +23,8 @@ export default function Workouts() {
   const routine = state.currentRoutine || 'A'
 
   const day = state.generatedWorkouts?.[dow]
-  const exercises = day?.[routine] || []
+  const isRehab = routine === 'R'
+  const exercises = isRehab ? [] : (day?.[routine] || [])
   const completedDay = !!state.completedWorkouts?.[dateKey]
   const dayGoal = state.dayGoals?.[dow] || null
 
@@ -59,7 +60,7 @@ export default function Workouts() {
     <>
       <header style={{ margin: '32px 0 16px' }}>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 4 }}>WORKOUT</p>
-        <h2 style={{ fontSize: 36 }}>{day?.icon || '💪'} {day?.name || 'Loading…'}</h2>
+        <h2 style={{ fontSize: 36 }}>{isRehab ? '🧘 Back / Egoscue' : `${day?.icon || '💪'} ${day?.name || 'Loading…'}`}</h2>
       </header>
 
       {isToday && <DailyBrief dayGoal={dayGoal} />}
@@ -82,12 +83,12 @@ export default function Workouts() {
         )}
 
         <div style={{ display: 'flex', gap: 6 }}>
-          {[['A', 'Routine A'], ['B', 'Routine B'], ['C', '⛳ Golf']].map(([r, label]) => (
+          {[['A', 'A'], ['B', 'B'], ['C', '⛳ Golf'], ['R', '🧘 Rehab']].map(([r, label]) => (
             <button
               key={r}
               onClick={() => setRoutine(r)}
               className={routine === r ? '' : 'secondary'}
-              style={{ flex: 1, padding: 9, fontSize: 13, fontWeight: 600 }}
+              style={{ flex: 1, padding: '9px 4px', fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap' }}
             >
               {label}
             </button>
@@ -95,7 +96,9 @@ export default function Workouts() {
         </div>
       </div>
 
-      {exercises.length === 0 ? (
+      {isRehab ? (
+        <EgoscueMenu />
+      ) : exercises.length === 0 ? (
         <div className="card">
           <p style={{ fontSize: 13, color: 'var(--muted)', textAlign: 'center' }}>
             No exercises generated for this day. Try updating your equipment in Settings.
@@ -114,19 +117,16 @@ export default function Workouts() {
         </div>
       )}
 
-      <button
-        onClick={markComplete}
-        className={completedDay ? 'secondary' : ''}
-        style={{ width: '100%', padding: 14, fontSize: 15, marginTop: 16 }}
-        disabled={exercises.length === 0}
-      >
-        {completedDay ? '✓ Workout marked complete — undo' : 'Mark workout complete'}
-      </button>
-
-      <div style={{ marginTop: 24 }}>
-        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 3, color: 'var(--accent3)', textTransform: 'uppercase', marginBottom: 8 }}>REHAB</p>
-        <EgoscueMenu />
-      </div>
+      {!isRehab && (
+        <button
+          onClick={markComplete}
+          className={completedDay ? 'secondary' : ''}
+          style={{ width: '100%', padding: 14, fontSize: 15, marginTop: 16 }}
+          disabled={exercises.length === 0}
+        >
+          {completedDay ? '✓ Workout marked complete — undo' : 'Mark workout complete'}
+        </button>
+      )}
     </>
   )
 }

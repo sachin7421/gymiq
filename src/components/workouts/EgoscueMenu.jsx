@@ -1,6 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
 import { useUserDataContext } from '../../contexts/UserDataContext.jsx'
-import { EGOSCUE_BACK, buildSteps, totalSeconds, fmtDuration, fmtClock } from '../../lib/egoscue.js'
+import { EGOSCUE_BACK, buildSteps, totalSeconds, fmtDuration, fmtClock, ytUrl } from '../../lib/egoscue.js'
+
+const linkStyle = {
+  background: 'var(--surface)', border: '1.5px solid var(--border)', color: 'var(--text2)',
+  padding: '5px 10px', borderRadius: 10, fontSize: 11, textDecoration: 'none',
+  display: 'inline-flex', alignItems: 'center', gap: 4, whiteSpace: 'nowrap', fontFamily: 'var(--font-mono)',
+}
+
+function ExLinks({ ex }) {
+  return (
+    <span style={{ display: 'inline-flex', gap: 6 }}>
+      <a href={ytUrl(ex)} target="_blank" rel="noreferrer" style={linkStyle}>▶ Watch</a>
+      <a href={ex.link} target="_blank" rel="noreferrer" style={{ ...linkStyle, color: 'var(--accent3)', borderColor: 'var(--accent3)' }}>e-cise ↗</a>
+    </span>
+  )
+}
 
 const STEPS = buildSteps(EGOSCUE_BACK)
 const TOTAL = totalSeconds(EGOSCUE_BACK)
@@ -34,13 +49,16 @@ export default function EgoscueMenu() {
         <>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 12 }}>
             {EGOSCUE_BACK.exercises.map((ex, i) => (
-              <div key={ex.id} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 10px', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 10 }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--muted)', width: 16 }}>{i + 1}</span>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ fontSize: 13, fontWeight: 600 }}>{ex.name}</p>
-                  <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>{fmtDuration(ex)}</p>
+              <div key={ex.id} style={{ padding: '8px 10px', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 10 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--muted)', width: 16 }}>{i + 1}</span>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <p style={{ fontSize: 13, fontWeight: 600 }}>{ex.name}</p>
+                    <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>{fmtDuration(ex)}</p>
+                  </div>
                 </div>
-                <a href={ex.link} target="_blank" rel="noreferrer" style={{ fontSize: 11, color: 'var(--accent3)', textDecoration: 'none', fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap' }}>e-cise ↗</a>
+                <p style={{ fontSize: 11, color: 'var(--text2)', fontStyle: 'italic', lineHeight: 1.45, margin: '6px 0 8px 26px' }}>{ex.cue}</p>
+                <div style={{ marginLeft: 26 }}><ExLinks ex={ex} /></div>
               </div>
             ))}
           </div>
@@ -186,7 +204,7 @@ function GuidedSession({ onExit, onComplete }) {
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <a href={step.link} target="_blank" rel="noreferrer" style={{ fontSize: 12, color: 'var(--accent3)', fontFamily: 'var(--font-mono)', textDecoration: 'none' }}>e-cise page ↗</a>
+        <ExLinks ex={step} />
         <button className="secondary sm" onClick={onExit}>End session</button>
       </div>
     </div>

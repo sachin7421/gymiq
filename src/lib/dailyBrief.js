@@ -26,6 +26,8 @@ export function buildBrief({ state, dayGoal, readiness, oura }) {
     body.push('Off-day. Sleep and protein are the work.')
   } else if (goalKey === 'recovery') {
     body.push('Active recovery. Walk, stretch, breathe — no hard intensity.')
+  } else if (goalKey === 'hybrid') {
+    body.push('Three compound lifts in 20 minutes, then a 20-minute incline hike, then stretch. Keep rest short — the hike is the finisher.')
   } else if (goalKey === 'cardio') {
     body.push(`Cardio. ${def.desc}`)
     // Steps last 7 days

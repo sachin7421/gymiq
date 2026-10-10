@@ -7,6 +7,7 @@ import { generateGoalDrivenWorkouts } from '../lib/goalGenerator.js'
 import { localDateStr } from '../lib/dateUtils.js'
 import { validateState } from '../lib/stateSchema.js'
 import { migrateWeekDrinks } from '../lib/alcohol.js'
+import { seedDayGoalsFromLegacy, lacksLowerBody } from '../lib/dayGoals.js'
 
 const SAVE_DEBOUNCE_MS = 1500
 const LS_KEY = 'gymiqState'
@@ -60,6 +61,15 @@ function applyWeeklyDrinkReset(state) {
     if (dt >= sunday) fresh[date] = count
   })
   return { ...state, weekDrinks: fresh }
+}
+
+// One-time: weeks seeded before Oct 2026 had no leg day. Reseed from the
+// full-body template so squats/hinges appear. Custom per-day edits are
+// replaced; the Settings editor is still there to adjust afterwards.
+function migrateLowerBody(state) {
+  if (state.lowerBodyMigrated) return state
+  if (!lacksLowerBody(state.dayGoals)) return { ...state, lowerBodyMigrated: true }
+  return { ...state, dayGoals: seedDayGoalsFromLegacy(state), lowerBodyMigrated: true }
 }
 
 function regenerateWorkouts(state) {
@@ -142,6 +152,7 @@ export function useUserData(userId) {
         // Carry legacy drink counts into the cap model before the weekly prune drops them.
         merged = migrateWeekDrinks(merged)
         merged = applyWeeklyDrinkReset(merged)
+        merged = migrateLowerBody(merged)
         merged = regenerateWorkouts(merged)
 
         if (!mounted.current) return

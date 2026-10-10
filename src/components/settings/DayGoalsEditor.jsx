@@ -60,7 +60,7 @@ export default function DayGoalsEditor() {
             {[1, 2, 3, 4, 5, 6, 0].map(dow => {
               const dg = state.dayGoals?.[dow] || { goal: 'rest' }
               const def = GOAL_DEFS[dg.goal] || GOAL_DEFS.rest
-              const showFocus = ['strength', 'hypertrophy'].includes(dg.goal)
+              const showFocus = ['strength', 'hypertrophy', 'hybrid'].includes(dg.goal)
               return (
                 <div key={dow} style={{
                   background: 'var(--surface2)',

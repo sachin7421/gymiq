@@ -9,6 +9,7 @@
 import { EX_DB } from './exerciseDb.js'
 import { GOAL_DEFS, FOCUS_DEFS, DEFAULT_DAY_GOALS } from './dayGoals.js'
 import { buildGolfRoutine } from './golfRoutine.js'
+import { rankPool } from './exercisePick.js'
 
 const LEVEL_NUM = { beginner: 1, intermediate: 2, advanced: 3 }
 
@@ -18,6 +19,7 @@ function repSchemeFor(goalKey, fitnessLevel) {
   const schemes = {
     strength: { beginner: '4×5', intermediate: '4×5', advanced: '5×3' },
     hypertrophy: { beginner: '3×10', intermediate: '4×10', advanced: '4×12' },
+    hybrid: { beginner: '3×8', intermediate: '3×10', advanced: '3×10' },
     cardio: { beginner: '20 min steady', intermediate: '8×30s on / 60s off', advanced: '10×30s on / 30s off' },
     mobility: { beginner: '2×8 each side', intermediate: '3×10 each side', advanced: '3×12 each side' },
     recovery: { beginner: '20 min easy', intermediate: '20-30 min easy', advanced: '30 min easy' },
@@ -38,14 +40,13 @@ function adjustForReadiness(detail, readiness) {
 
 function pickExercises(eq, fitnessLevel, muscles, count, excludeIds = []) {
   const lvlNum = LEVEL_NUM[fitnessLevel] || 2
-  return Object.entries(EX_DB)
-    .filter(([id, ex]) =>
-      muscles.some(m => ex.muscles.includes(m)) &&
-      ex.level <= lvlNum &&
-      ex.req.some(r => eq.has(r)) &&
-      !excludeIds.includes(id)
-    )
-    .sort((a, b) => b[1].level - a[1].level)
+  const pool = Object.entries(EX_DB).filter(([id, ex]) =>
+    muscles.some(m => ex.muscles.includes(m)) &&
+    ex.level <= lvlNum &&
+    ex.req.some(r => eq.has(r)) &&
+    !excludeIds.includes(id)
+  )
+  return rankPool(pool, muscles, eq)
     .slice(0, count)
     .map(([id, ex]) => ({ id, ex }))
 }
@@ -151,6 +152,26 @@ function buildMobilityDay(eq, fitnessLevel, readiness) {
   ]
 }
 
+// Strength + Hike: a tight 20-minute compound block (3 lifts, short rest),
+// then a 20-minute incline treadmill hike, then stretching. Built for days
+// when a full session isn't on but you still want load + steps.
+function buildHybridDay(eq, fitnessLevel, focus, readiness, variant = 'A') {
+  const muscles = FOCUS_DEFS[focus]?.muscles || FOCUS_DEFS.full.muscles
+  const count = 3
+  const all = pickExercises(eq, fitnessLevel, muscles, count * 2)
+  const slice = variant === 'A' ? all.slice(0, count) : all.slice(count, count * 2)
+  const exs = (slice.length >= 2 ? slice : all.slice(0, count))
+    .map(p => makeExerciseEntry(p, 'hybrid', fitnessLevel, readiness))
+    .map(e => ({ ...e, detail: `${e.detail} · 60s rest · ~20 min block` }))
+  const hike = eq.has('treadmill')
+    ? { id: 'hybrid_hike', name: 'Treadmill Hike', detail: '20 min · 8–12% incline · 3.0–3.5 mph', icon: '🥾', type: 'cardio', hasWeight: false, cue: 'Hands off the rails. Steady breathing, zone 2. Bump incline before speed.', yt: 'incline treadmill walking workout' }
+    : { id: 'hybrid_walk', name: 'Brisk Hike / Walk', detail: '20 min · hills if you have them', icon: '🥾', type: 'cardio', hasWeight: false, cue: 'Purposeful pace you could still talk through. Find an incline.', yt: 'brisk walking workout' }
+  const stretch = [
+    { id: 'hybrid_stretch', name: 'Full Body Stretch', detail: '8–10 min · hips, hamstrings, calves, chest, lats', icon: '🤸', type: 'cooldown', hasWeight: false, cue: 'Hold 30–45s each. Calves and hip flexors get extra time after the hike.', yt: 'full body stretch after walking' },
+  ]
+  return [...warmup(eq).map(w => ({ ...w, detail: '3 min easy + arm circles, leg swings' })), ...exs, hike, ...stretch]
+}
+
 function buildRecoveryDay(eq) {
   return [
     { id: 'rec_walk', name: 'Light Walk', detail: '20-30 min', icon: '🚶', type: 'cardio', hasWeight: false, cue: 'Easy recovery pace. Just move.', yt: 'walking benefits' },
@@ -173,6 +194,7 @@ export function generateDay(eq, fitnessLevel, dayGoal, readiness, variant = 'A')
     case 'strength':    return buildStrengthDay(eq, fitnessLevel, focus, readiness, variant)
     case 'hypertrophy': return buildHypertrophyDay(eq, fitnessLevel, focus, readiness, variant)
     case 'cardio':      return buildCardioDay(eq, fitnessLevel, readiness, variant)
+    case 'hybrid':      return buildHybridDay(eq, fitnessLevel, focus, readiness, variant)
     case 'mobility':    return buildMobilityDay(eq, fitnessLevel, readiness)
     case 'recovery':    return buildRecoveryDay(eq)
     case 'rest':
