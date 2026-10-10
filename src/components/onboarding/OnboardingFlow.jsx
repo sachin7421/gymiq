@@ -85,7 +85,7 @@ export default function OnboardingFlow() {
       {step === 5 && <Wearable data={data} setData={setData} />}
 
       {error && (
-        <p style={{ color: 'var(--danger)', fontSize: 13, fontFamily: 'var(--font-mono)', textAlign: 'center', marginTop: 12 }}>
+        <p style={{ color: 'var(--danger)', fontSize: 14, fontFamily: 'var(--font-mono)', textAlign: 'center', marginTop: 12 }}>
           {error}
         </p>
       )}
@@ -124,7 +124,7 @@ function Stepper({ step }) {
 function Welcome({ onNext }) {
   return (
     <div style={{ textAlign: 'center', padding: '40px 0' }}>
-      <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 3, color: 'var(--accent)', marginBottom: 6 }}>WELCOME TO</p>
+      <p style={{ fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: 3, color: 'var(--accent)', marginBottom: 6 }}>WELCOME TO</p>
       <h1 style={{ marginBottom: 24 }}>Gym<span style={{ color: 'var(--accent)' }}>IQ</span></h1>
       <p style={{ fontSize: 16, color: 'var(--text2)', lineHeight: 1.6, maxWidth: 360, margin: '0 auto 32px' }}>
         Your gym, your data, your plan. Quick 6-step setup tunes your workouts to your equipment and level.
@@ -173,14 +173,14 @@ function Equipment({ data, setData }) {
   return (
     <div className="card">
       <p className="card-title">What's in your gym?</p>
-      <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 14 }}>
+      <p style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 14 }}>
         Tap everything you have access to — workouts adapt to match.
       </p>
       {EQUIPMENT_CATEGORIES.map(cat => {
         const items = EQUIPMENT_LIST.filter(e => e.cat === cat)
         return (
           <div key={cat} style={{ marginBottom: 16 }}>
-            <p style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: 2, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 8 }}>{cat}</p>
+            <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 2, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 8 }}>{cat}</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(140px,1fr))', gap: 6 }}>
               {items.map(eq => {
                 const on = data.equipment.includes(eq.id)
@@ -193,7 +193,7 @@ function Equipment({ data, setData }) {
                     style={{
                       display: 'flex', alignItems: 'center', gap: 6,
                       justifyContent: 'flex-start',
-                      padding: '8px 10px', fontSize: 12,
+                      padding: '8px 10px', fontSize: 13,
                       borderColor: on ? 'var(--accent)' : 'var(--border)',
                     }}
                   >
@@ -214,7 +214,7 @@ function Schedule({ data, setData }) {
   return (
     <div className="card">
       <p className="card-title">How often?</p>
-      <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 14 }}>
+      <p style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 14 }}>
         Days per week you'll commit to a workout.
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 8 }}>
@@ -263,7 +263,7 @@ function Level({ data, setData }) {
               }}
             >
               <span style={{ fontSize: 15, fontWeight: 700 }}>{o.label}</span>
-              <span style={{ fontSize: 12, opacity: 0.85, fontWeight: 400 }}>{o.desc}</span>
+              <span style={{ fontSize: 13, opacity: 0.85, fontWeight: 400 }}>{o.desc}</span>
             </button>
           )
         })}
@@ -303,7 +303,7 @@ function Wearable({ data, setData }) {
   return (
     <div className="card">
       <p className="card-title">Wearable</p>
-      <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 14 }}>
+      <p style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 14 }}>
         Optional — pulls in readiness, sleep, HRV, and active calories.
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
@@ -328,9 +328,9 @@ function Wearable({ data, setData }) {
               }}
             >
               <span style={{ fontSize: 22 }}>{o.icon}</span>
-              <span style={{ fontSize: 13, fontWeight: 600 }}>{o.label}</span>
+              <span style={{ fontSize: 14, fontWeight: 600 }}>{o.label}</span>
               {!o.avail && (
-                <span style={{ fontSize: 9, fontFamily: 'var(--font-mono)', color: 'var(--muted)', letterSpacing: 1 }}>SOON</span>
+                <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--muted)', letterSpacing: 1 }}>SOON</span>
               )}
             </button>
           )
@@ -339,7 +339,7 @@ function Wearable({ data, setData }) {
 
       {data.wearable === 'oura' && (
         <div style={{ marginTop: 14, padding: 12, background: 'var(--surface2)', borderRadius: 12, border: '1px solid var(--border)' }}>
-          <p style={{ fontSize: 12, color: 'var(--text2)', marginBottom: 8 }}>
+          <p style={{ fontSize: 13, color: 'var(--text2)', marginBottom: 8 }}>
             Get a Personal Access Token at <span style={{ color: 'var(--accent)' }}>cloud.ouraring.com/personal-access-tokens</span>
           </p>
           <div style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
@@ -354,7 +354,7 @@ function Wearable({ data, setData }) {
             </button>
           </div>
           {testResult && (
-            <p style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: testResult.ok ? 'var(--success)' : 'var(--danger)' }}>
+            <p style={{ fontSize: 13, fontFamily: 'var(--font-mono)', color: testResult.ok ? 'var(--success)' : 'var(--danger)' }}>
               {testResult.msg}
             </p>
           )}
@@ -367,7 +367,7 @@ function Wearable({ data, setData }) {
 function Field({ label, children }) {
   return (
     <label style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-      <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: 2, color: 'var(--muted)', textTransform: 'uppercase' }}>{label}</span>
+      <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 2, color: 'var(--muted)', textTransform: 'uppercase' }}>{label}</span>
       {children}
     </label>
   )

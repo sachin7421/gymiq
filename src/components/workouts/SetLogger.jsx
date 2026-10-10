@@ -102,20 +102,20 @@ export default function SetLogger({ exercise, dateKey, isReadOnly }) {
           padding: '8px 10px',
           marginBottom: 10,
         }}>
-          <p style={{ fontSize: 12, color: 'var(--text)', lineHeight: 1.4 }}>
+          <p style={{ fontSize: 13, color: 'var(--text)', lineHeight: 1.4 }}>
             <strong>Suggested:</strong> {suggestion.weight} lbs
             {suggestion.delta !== 0 && (
               <span style={{
                 marginLeft: 6,
                 fontFamily: 'var(--font-mono)',
-                fontSize: 11,
+                fontSize: 12,
                 color: suggestion.delta > 0 ? 'var(--accent)' : 'var(--accent2)',
               }}>
                 ({suggestion.delta > 0 ? '+' : ''}{suggestion.delta})
               </span>
             )}
           </p>
-          <p style={{ fontSize: 11, color: 'var(--muted)', marginTop: 2, lineHeight: 1.4 }}>
+          <p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 2, lineHeight: 1.4 }}>
             {suggestion.reason}
           </p>
         </div>
@@ -128,7 +128,7 @@ export default function SetLogger({ exercise, dateKey, isReadOnly }) {
           borderRadius: 8,
           padding: '6px 10px',
           marginBottom: 8,
-          fontSize: 11,
+          fontSize: 12,
           color: 'var(--text2)',
         }}>
           ⚠ Low recovery — consider a deload session.
@@ -144,7 +144,7 @@ export default function SetLogger({ exercise, dateKey, isReadOnly }) {
               padding: '6px 10px', marginBottom: 4,
               background: 'var(--surface)', borderRadius: 8,
               border: '1px solid var(--border)',
-              fontFamily: 'var(--font-mono)', fontSize: 12,
+              fontFamily: 'var(--font-mono)', fontSize: 13,
             }}>
               <span style={{ color: 'var(--muted)', width: 22 }}>#{i + 1}</span>
               <span style={{ flex: 1, color: 'var(--text)' }}>
@@ -152,7 +152,7 @@ export default function SetLogger({ exercise, dateKey, isReadOnly }) {
                 {s.rpe ? <span style={{ color: 'var(--muted)' }}> @ RPE {s.rpe}</span> : null}
               </span>
               {hasWeight && (
-                <span style={{ color: 'var(--muted)', fontSize: 10 }}>
+                <span style={{ color: 'var(--muted)', fontSize: 11 }}>
                   e1RM {Math.round(setE1RM(s))}
                 </span>
               )}
@@ -160,7 +160,7 @@ export default function SetLogger({ exercise, dateKey, isReadOnly }) {
                 <button
                   onClick={() => deleteSet(i)}
                   className="secondary sm"
-                  style={{ padding: '2px 8px', fontSize: 11 }}
+                  style={{ padding: '2px 8px', fontSize: 12 }}
                   aria-label="Remove set"
                 >
                   ×
@@ -169,7 +169,7 @@ export default function SetLogger({ exercise, dateKey, isReadOnly }) {
             </div>
           ))}
           {totalE1rm > 0 && (
-            <div style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 6 }}>
+            <div style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 6 }}>
               Best e1RM today: <strong style={{ color: 'var(--text)' }}>{Math.round(totalE1rm)}</strong>
               {isPR && (
                 <span style={{ color: 'var(--accent2)', marginLeft: 6, fontWeight: 600 }}>🏆 NEW PR</span>
@@ -190,7 +190,7 @@ export default function SetLogger({ exercise, dateKey, isReadOnly }) {
               placeholder="lbs"
               value={weight}
               onChange={e => setWeight(e.target.value)}
-              style={{ flex: '0 0 80px', padding: '8px 10px', fontSize: 13 }}
+              style={{ flex: '0 0 80px', padding: '8px 10px', fontSize: 14 }}
             />
           )}
           <input
@@ -200,7 +200,7 @@ export default function SetLogger({ exercise, dateKey, isReadOnly }) {
             placeholder="reps"
             value={reps}
             onChange={e => setReps(e.target.value)}
-            style={{ flex: '0 0 70px', padding: '8px 10px', fontSize: 13 }}
+            style={{ flex: '0 0 70px', padding: '8px 10px', fontSize: 14 }}
           />
           {isStrength && (
             <input
@@ -212,7 +212,7 @@ export default function SetLogger({ exercise, dateKey, isReadOnly }) {
               placeholder="RPE"
               value={rpe}
               onChange={e => setRpe(e.target.value)}
-              style={{ flex: '0 0 70px', padding: '8px 10px', fontSize: 13 }}
+              style={{ flex: '0 0 70px', padding: '8px 10px', fontSize: 14 }}
               title="Rate of perceived exertion (1-10)"
             />
           )}
@@ -244,14 +244,14 @@ export default function SetLogger({ exercise, dateKey, isReadOnly }) {
         </div>
       )}
       {voice.transcript && !voice.listening && (
-        <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 4 }}>
+        <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 4 }}>
           heard: "{voice.transcript}"
         </p>
       )}
 
       {/* Plate calc */}
       {hasWeight && !isReadOnly && weight && parseFloat(weight) > 45 && (
-        <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 6 }}>
+        <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 6 }}>
           Per side: {summarizePlates(parseFloat(weight))}
         </p>
       )}
@@ -285,7 +285,7 @@ export default function SetLogger({ exercise, dateKey, isReadOnly }) {
           color: 'var(--accent)',
           borderRadius: 8,
           fontFamily: 'var(--font-mono)',
-          fontSize: 12,
+          fontSize: 13,
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',

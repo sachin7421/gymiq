@@ -5,7 +5,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, R
 export default function WeightChart({ history, waist = [], goal }) {
   if ((!history || history.length === 0) && waist.length === 0) {
     return (
-      <p style={{ fontSize: 12, color: 'var(--muted)', textAlign: 'center', padding: 20 }}>
+      <p style={{ fontSize: 13, color: 'var(--muted)', textAlign: 'center', padding: 20 }}>
         Log a weight to see your trend.
       </p>
     )
@@ -31,19 +31,19 @@ export default function WeightChart({ history, waist = [], goal }) {
             </linearGradient>
           </defs>
           <CartesianGrid stroke="var(--border)" strokeDasharray="3 3" />
-          <XAxis dataKey="label" stroke="var(--muted)" tick={{ fontSize: 10, fontFamily: 'var(--font-mono)' }} />
-          <YAxis yAxisId="w" stroke="var(--muted)" tick={{ fontSize: 10, fontFamily: 'var(--font-mono)' }} domain={['auto', 'auto']} />
+          <XAxis dataKey="label" stroke="var(--muted)" tick={{ fontSize: 11, fontFamily: 'var(--font-mono)' }} />
+          <YAxis yAxisId="w" stroke="var(--muted)" tick={{ fontSize: 11, fontFamily: 'var(--font-mono)' }} domain={['auto', 'auto']} />
           {hasWaist && (
-            <YAxis yAxisId="in" orientation="right" stroke="var(--accent3)" tick={{ fontSize: 10, fontFamily: 'var(--font-mono)' }} domain={['auto', 'auto']} width={34} />
+            <YAxis yAxisId="in" orientation="right" stroke="var(--accent3)" tick={{ fontSize: 11, fontFamily: 'var(--font-mono)' }} domain={['auto', 'auto']} width={34} />
           )}
           <Tooltip
-            contentStyle={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, fontSize: 12 }}
+            contentStyle={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, fontSize: 13 }}
             labelStyle={{ color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}
             formatter={(v, name) => [name === 'waist' ? `${v} in` : `${v} lbs`, name === 'waist' ? 'Waist' : 'Weight']}
           />
-          {hasWaist && <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'var(--font-mono)' }} />}
+          {hasWaist && <Legend wrapperStyle={{ fontSize: 12, fontFamily: 'var(--font-mono)' }} />}
           {goal != null && goal > 0 && (
-            <ReferenceLine yAxisId="w" y={goal} stroke="var(--success)" strokeDasharray="4 4" label={{ value: `Goal ${goal}`, fill: 'var(--success)', fontSize: 10, position: 'insideTopRight' }} />
+            <ReferenceLine yAxisId="w" y={goal} stroke="var(--success)" strokeDasharray="4 4" label={{ value: `Goal ${goal}`, fill: 'var(--success)', fontSize: 11, position: 'insideTopRight' }} />
           )}
           <Line
             yAxisId="w"

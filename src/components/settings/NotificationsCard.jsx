@@ -77,7 +77,7 @@ export default function NotificationsCard() {
   return (
     <div className="card">
       <p className="card-title">🔔 Reminders</p>
-      <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 10, lineHeight: 1.45 }}>
+      <p style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 10, lineHeight: 1.45 }}>
         A morning push with today's session and a motivational line (plus your creatine nudge),
         and a night push that checks your live step count and tells you how long a walk gets you to 10k
         (plus magnesium). Times are local — {deviceTimeZone()}.
@@ -121,7 +121,7 @@ export default function NotificationsCard() {
       )}
 
       {msg && (
-        <p style={{ fontSize: 12, marginTop: 10, fontFamily: 'var(--font-mono)', color: msg.ok ? 'var(--success)' : 'var(--danger)' }}>{msg.text}</p>
+        <p style={{ fontSize: 13, marginTop: 10, fontFamily: 'var(--font-mono)', color: msg.ok ? 'var(--success)' : 'var(--danger)' }}>{msg.text}</p>
       )}
     </div>
   )
@@ -140,10 +140,10 @@ function TimeRow({ emoji, label, enabled, time, onToggle, onTime }) {
         <span style={{ display: 'block', width: 20, height: 20, borderRadius: '50%', background: '#fff', transform: enabled ? 'translateX(16px)' : 'none', transition: 'transform 0.15s' }} />
       </button>
       <span style={{ fontSize: 16 }}>{emoji}</span>
-      <span style={{ flex: 1, fontSize: 13, opacity: enabled ? 1 : 0.6 }}>{label}</span>
+      <span style={{ flex: 1, fontSize: 14, opacity: enabled ? 1 : 0.6 }}>{label}</span>
       <input
         type="time" value={time} onChange={e => onTime(e.target.value)} disabled={!enabled}
-        style={{ fontFamily: 'var(--font-mono)', fontSize: 13, padding: '4px 6px', borderRadius: 8, border: '1.5px solid var(--border)', background: 'var(--surface)', color: 'var(--text)' }}
+        style={{ fontFamily: 'var(--font-mono)', fontSize: 14, padding: '4px 6px', borderRadius: 8, border: '1.5px solid var(--border)', background: 'var(--surface)', color: 'var(--text)' }}
       />
     </div>
   )
@@ -152,7 +152,7 @@ function TimeRow({ emoji, label, enabled, time, onToggle, onTime }) {
 function Note({ tone, children }) {
   const color = tone === 'danger' ? 'var(--danger)' : 'var(--warn)'
   return (
-    <p style={{ fontSize: 12, lineHeight: 1.45, color, background: 'var(--surface2)', border: `1px solid ${color}55`, borderRadius: 10, padding: '8px 10px', marginBottom: 10 }}>
+    <p style={{ fontSize: 13, lineHeight: 1.45, color, background: 'var(--surface2)', border: `1px solid ${color}55`, borderRadius: 10, padding: '8px 10px', marginBottom: 10 }}>
       {children}
     </p>
   )

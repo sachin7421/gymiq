@@ -12,7 +12,7 @@ export default function LiftingLog() {
     return (
       <div className="card">
         <p className="card-title">Lifting log</p>
-        <p style={{ fontSize: 12, color: 'var(--muted)', textAlign: 'center', padding: 12 }}>
+        <p style={{ fontSize: 13, color: 'var(--muted)', textAlign: 'center', padding: 12 }}>
           Log weights on the Workout tab to build your history.
         </p>
       </div>
@@ -35,13 +35,13 @@ export default function LiftingLog() {
             }}>
               <span style={{ fontSize: 18 }}>{e.icon}</span>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <p style={{ fontSize: 13, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{e.name}</p>
-                <p style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: 'var(--muted)' }}>{e.date}</p>
+                <p style={{ fontSize: 14, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{e.name}</p>
+                <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--muted)' }}>{e.date}</p>
               </div>
               <div style={{ textAlign: 'right' }}>
-                <p style={{ fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 500 }}>{e.weight} <span style={{ fontSize: 10, color: 'var(--muted)' }}>lbs</span></p>
+                <p style={{ fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 500 }}>{e.weight} <span style={{ fontSize: 11, color: 'var(--muted)' }}>lbs</span></p>
                 {delta != null && (
-                  <p style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: deltaColor }}>
+                  <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: deltaColor }}>
                     {delta > 0 ? `↑ +${delta.toFixed(1)}` : delta < 0 ? `↓ ${delta.toFixed(1)}` : '= prev'}
                   </p>
                 )}

@@ -91,7 +91,7 @@ export default function E1RMTrend() {
   return (
     <div className="card">
       <p className="card-title">📊 Strength Progression</p>
-      <p style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 12 }}>
+      <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 12 }}>
         e1RM over time per lift. Logged with reps + RPE; estimated 1-rep max.
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -103,10 +103,10 @@ export default function E1RMTrend() {
             <div key={t.id} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 4px', borderBottom: '1px solid var(--border)' }}>
               <span style={{ fontSize: 18 }}>{ex?.icon || '🏋️'}</span>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <p style={{ fontSize: 13, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <p style={{ fontSize: 14, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {ex?.name || t.id}
                 </p>
-                <p style={{ fontSize: 10, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
+                <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
                   {fmtDate(first.dateKey)} → {fmtDate(last.dateKey)} · {t.points.length} sessions
                 </p>
               </div>
@@ -117,7 +117,7 @@ export default function E1RMTrend() {
                 </p>
                 <p style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: 10,
+                  fontSize: 11,
                   color: t.delta > 0 ? 'var(--accent)' : t.delta < 0 ? 'var(--accent2)' : 'var(--muted)',
                 }}>
                   {t.delta > 0 ? '↑' : t.delta < 0 ? '↓' : '='} {Math.abs(t.pct).toFixed(0)}%

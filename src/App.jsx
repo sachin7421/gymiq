@@ -16,7 +16,7 @@ const History = lazy(() => import('./pages/History.jsx'))
 function Loading({ label = 'LOADING…' }) {
   return (
     <div className="app" style={{ display: 'grid', placeItems: 'center', minHeight: '100vh' }}>
-      <p style={{ color: 'var(--muted)', fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: 2 }}>{label}</p>
+      <p style={{ color: 'var(--muted)', fontFamily: 'var(--font-mono)', fontSize: 13, letterSpacing: 2 }}>{label}</p>
     </div>
   )
 }

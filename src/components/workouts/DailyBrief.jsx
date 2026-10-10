@@ -33,12 +33,12 @@ export default function DailyBrief({ dayGoal }) {
   return (
     <div className="card" style={{ borderLeft: `4px solid ${brief.color}` }}>
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 6 }}>
-        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: 2, color: 'var(--muted)', textTransform: 'uppercase' }}>
+        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 2, color: 'var(--muted)', textTransform: 'uppercase' }}>
           TODAY'S BRIEF · {brief.dowName}
         </p>
         {brief.readinessScore != null && (
           <span style={{
-            fontSize: 11,
+            fontSize: 12,
             fontFamily: 'var(--font-mono)',
             padding: '2px 8px',
             borderRadius: 100,
@@ -56,7 +56,7 @@ export default function DailyBrief({ dayGoal }) {
         {brief.icon} {brief.headline}
       </p>
       {brief.body && (
-        <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.55 }}>
+        <p style={{ fontSize: 14, color: 'var(--text2)', lineHeight: 1.55 }}>
           {brief.body}
         </p>
       )}

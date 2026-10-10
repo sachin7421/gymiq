@@ -7,7 +7,7 @@ export default function EquipmentGrid({ selected, onToggle }) {
         const items = EQUIPMENT_LIST.filter(e => e.cat === cat)
         return (
           <div key={cat} style={{ marginBottom: 16 }}>
-            <p style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: 2, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 8 }}>{cat}</p>
+            <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 2, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 8 }}>{cat}</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(140px,1fr))', gap: 6 }}>
               {items.map(eq => {
                 const on = selected.includes(eq.id)
@@ -20,7 +20,7 @@ export default function EquipmentGrid({ selected, onToggle }) {
                     style={{
                       display: 'flex', alignItems: 'center', gap: 6,
                       justifyContent: 'flex-start',
-                      padding: '8px 10px', fontSize: 12,
+                      padding: '8px 10px', fontSize: 13,
                       borderColor: on ? 'var(--accent)' : 'var(--border)',
                     }}
                   >

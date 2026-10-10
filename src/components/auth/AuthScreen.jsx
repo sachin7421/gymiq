@@ -31,7 +31,7 @@ export default function AuthScreen() {
     <div className="app" style={{ minHeight: '100vh', display: 'grid', placeItems: 'center' }}>
       <div style={{ width: '100%', maxWidth: 380 }}>
         <header style={{ marginBottom: 32, textAlign: 'center' }}>
-          <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 6 }}>YOUR GYM. YOUR DATA. YOUR PLAN.</p>
+          <p style={{ fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 6 }}>YOUR GYM. YOUR DATA. YOUR PLAN.</p>
           <h1 style={{ fontSize: 'clamp(56px,14vw,88px)' }}>Gym<span style={{ color: 'var(--accent)' }}>IQ</span></h1>
         </header>
 
@@ -40,7 +40,7 @@ export default function AuthScreen() {
             Continue with Google
           </button>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '12px 0', color: 'var(--muted)', fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: 2 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '12px 0', color: 'var(--muted)', fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 2 }}>
             <div style={{ flex: 1, height: 1, background: 'var(--border)' }} />
             OR
             <div style={{ flex: 1, height: 1, background: 'var(--border)' }} />
@@ -70,7 +70,7 @@ export default function AuthScreen() {
           </form>
 
           {error && (
-            <p style={{ color: 'var(--danger)', fontSize: 13, marginTop: 12, fontFamily: 'var(--font-mono)' }}>
+            <p style={{ color: 'var(--danger)', fontSize: 14, marginTop: 12, fontFamily: 'var(--font-mono)' }}>
               {error}
             </p>
           )}

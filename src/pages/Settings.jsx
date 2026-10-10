@@ -129,7 +129,7 @@ export default function Settings() {
   return (
     <>
       <header style={{ margin: '32px 0 16px' }}>
-        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 4 }}>SETTINGS</p>
+        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 4 }}>SETTINGS</p>
         <h2 style={{ fontSize: 36 }}>Profile</h2>
       </header>
 
@@ -186,7 +186,7 @@ export default function Settings() {
 
       <div className="card">
         <p className="card-title">Equipment ({state.equipment?.length || 0} selected)</p>
-        <p style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 10 }}>Workouts regenerate when you toggle items.</p>
+        <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 10 }}>Workouts regenerate when you toggle items.</p>
         <EquipmentGrid selected={state.equipment || []} onToggle={toggleEquipment} />
       </div>
 
@@ -202,12 +202,12 @@ export default function Settings() {
         <p className="card-title">Wearable</p>
         {state.hasOura ? (
           <>
-            <p style={{ fontSize: 13, color: 'var(--success)', marginBottom: 10 }}>💍 Oura Ring connected</p>
+            <p style={{ fontSize: 14, color: 'var(--success)', marginBottom: 10 }}>💍 Oura Ring connected</p>
             <button onClick={disconnectOura} className="danger" style={{ width: '100%' }}>Disconnect Oura</button>
           </>
         ) : (
           <>
-            <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 8 }}>
+            <p style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 8 }}>
               Get a token at cloud.ouraring.com/personal-access-tokens
             </p>
             <div style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
@@ -217,7 +217,7 @@ export default function Settings() {
               </button>
             </div>
             {tokenStatus && (
-              <p style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: tokenStatus.ok ? 'var(--success)' : 'var(--danger)' }}>
+              <p style={{ fontSize: 13, fontFamily: 'var(--font-mono)', color: tokenStatus.ok ? 'var(--success)' : 'var(--danger)' }}>
                 {tokenStatus.msg}
               </p>
             )}
@@ -227,13 +227,13 @@ export default function Settings() {
 
       <div className="card">
         <p className="card-title">🧠 Coach (Claude API)</p>
-        <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 8, lineHeight: 1.4 }}>
+        <p style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 8, lineHeight: 1.4 }}>
           Paste an Anthropic API key (console.anthropic.com) to enable the
           coach. Stored only in your account. Each question costs ~$0.001.
         </p>
         {state.anthropicKey ? (
           <>
-            <p style={{ fontSize: 13, color: 'var(--success)', marginBottom: 8 }}>
+            <p style={{ fontSize: 14, color: 'var(--success)', marginBottom: 8 }}>
               ✓ Coach enabled (key ending …{state.anthropicKey.slice(-4)})
             </p>
             <button onClick={clearCoachKey} className="danger" style={{ width: '100%' }}>
@@ -266,7 +266,7 @@ export default function Settings() {
 
       <div className="card">
         <p className="card-title">Danger zone</p>
-        <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 8, lineHeight: 1.4 }}>
+        <p style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 8, lineHeight: 1.4 }}>
           Permanently delete your GymIQ data. Your auth account remains — re-signing in starts you fresh.
         </p>
         <button className="danger" onClick={deleteAccount} style={{ width: '100%' }}>
@@ -280,7 +280,7 @@ export default function Settings() {
 function Field({ label, children }) {
   return (
     <label style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-      <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: 2, color: 'var(--muted)', textTransform: 'uppercase' }}>{label}</span>
+      <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 2, color: 'var(--muted)', textTransform: 'uppercase' }}>{label}</span>
       {children}
     </label>
   )

@@ -38,7 +38,7 @@ export default function BottomNav() {
               textDecoration: 'none',
               color: isActive ? 'var(--accent)' : 'var(--muted)',
               fontFamily: 'var(--font-mono)',
-              fontSize: 10,
+              fontSize: 11,
               letterSpacing: 1.5,
               textTransform: 'uppercase',
             })}

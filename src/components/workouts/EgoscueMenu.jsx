@@ -4,7 +4,7 @@ import { EGOSCUE_BACK, buildSteps, totalSeconds, fmtDuration, fmtClock, ytUrl } 
 
 const linkStyle = {
   background: 'var(--surface)', border: '1.5px solid var(--border)', color: 'var(--text2)',
-  padding: '5px 10px', borderRadius: 10, fontSize: 11, textDecoration: 'none',
+  padding: '5px 10px', borderRadius: 10, fontSize: 12, textDecoration: 'none',
   display: 'inline-flex', alignItems: 'center', gap: 4, whiteSpace: 'nowrap', fontFamily: 'var(--font-mono)',
 }
 
@@ -37,7 +37,7 @@ export default function EgoscueMenu() {
     <div className="card" style={{ borderLeft: '4px solid var(--accent3)' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
         <p className="card-title" style={{ marginBottom: 0, flex: 1 }}>Rehab · {EGOSCUE_BACK.name}</p>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--muted)' }}>~{Math.round(TOTAL / 60)} min + 60 squeezes</span>
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--muted)' }}>~{Math.round(TOTAL / 60)} min + 60 squeezes</span>
       </div>
 
       {running ? (
@@ -51,13 +51,13 @@ export default function EgoscueMenu() {
             {EGOSCUE_BACK.exercises.map((ex, i) => (
               <div key={ex.id} style={{ padding: '8px 10px', background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 10 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--muted)', width: 16 }}>{i + 1}</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--muted)', width: 16 }}>{i + 1}</span>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <p style={{ fontSize: 13, fontWeight: 600 }}>{ex.name}</p>
-                    <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>{fmtDuration(ex)}</p>
+                    <p style={{ fontSize: 14, fontWeight: 600 }}>{ex.name}</p>
+                    <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>{fmtDuration(ex)}</p>
                   </div>
                 </div>
-                <p style={{ fontSize: 11, color: 'var(--text2)', fontStyle: 'italic', lineHeight: 1.45, margin: '6px 0 8px 26px' }}>{ex.cue}</p>
+                <p style={{ fontSize: 12, color: 'var(--text2)', fontStyle: 'italic', lineHeight: 1.45, margin: '6px 0 8px 26px' }}>{ex.cue}</p>
                 <div style={{ marginLeft: 26 }}><ExLinks ex={ex} /></div>
               </div>
             ))}
@@ -69,13 +69,13 @@ export default function EgoscueMenu() {
               type="button"
               onClick={() => setHabit(!doneToday)}
               className={doneToday ? '' : 'secondary'}
-              style={{ flex: 1, padding: 12, fontSize: 13, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
+              style={{ flex: 1, padding: 12, fontSize: 14, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
             >
               <span style={{
                 width: 20, height: 20, borderRadius: 6,
                 border: `2px solid ${doneToday ? '#fff' : 'var(--border)'}`,
                 background: doneToday ? 'transparent' : 'var(--surface)',
-                color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12,
+                color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13,
               }}>{doneToday ? '✓' : ''}</span>
               {doneToday ? 'Done today' : 'Mark done'}
             </button>
@@ -167,11 +167,11 @@ function GuidedSession({ onExit, onComplete }) {
 
   return (
     <div>
-      <p style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: 2, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 6 }}>
+      <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 2, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 6 }}>
         Step {idx + 1} of {STEPS.length}{step.side ? ` · ${step.side} side` : ''}
       </p>
       <p style={{ fontFamily: 'var(--font-display)', fontSize: 26, lineHeight: 1.05, marginBottom: 6 }}>{step.name}</p>
-      <p style={{ fontSize: 12, color: 'var(--text2)', lineHeight: 1.5, fontStyle: 'italic', marginBottom: 12 }}>{step.cue}</p>
+      <p style={{ fontSize: 13, color: 'var(--text2)', lineHeight: 1.5, fontStyle: 'italic', marginBottom: 12 }}>{step.cue}</p>
 
       <div style={{ textAlign: 'center', padding: '8px 0 12px' }}>
         {timed ? (
@@ -186,7 +186,7 @@ function GuidedSession({ onExit, onComplete }) {
         ) : (
           <>
             <p style={{ fontFamily: 'var(--font-display)', fontSize: 72, lineHeight: 1, color: 'var(--accent3)' }}>×{step.reps}</p>
-            <p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 4 }}>Count them out, then tap Done.</p>
+            <p style={{ fontSize: 13, color: 'var(--muted)', marginTop: 4 }}>Count them out, then tap Done.</p>
           </>
         )}
       </div>

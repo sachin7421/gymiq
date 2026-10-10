@@ -36,7 +36,7 @@ export default function AlcoholTracker() {
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginBottom: 4 }}>
         <span style={{ fontFamily: 'var(--font-display)', fontSize: 52, lineHeight: 1, color: usedColor }}>{week.used}</span>
         <span style={{ fontFamily: 'var(--font-display)', fontSize: 22, color: 'var(--muted)' }}>/{week.cap}</span>
-        <span style={{ fontSize: 12, color: 'var(--muted)', marginLeft: 4 }}>
+        <span style={{ fontSize: 13, color: 'var(--muted)', marginLeft: 4 }}>
           drinking days this week · {week.over ? `${week.used - week.cap} over cap` : `${week.remaining} left`}
         </span>
       </div>
@@ -65,7 +65,7 @@ export default function AlcoholTracker() {
                 style={{
                   width: 34, height: 34, padding: 0, borderRadius: '50%',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: 13,
+                  fontSize: 14,
                   background: drink ? 'rgba(224,92,26,0.15)' : dry ? 'rgba(42,125,79,0.15)' : 'var(--surface2)',
                   color: drink ? 'var(--accent2)' : dry ? 'var(--success)' : 'var(--muted)',
                   border: '1.5px solid',
@@ -76,7 +76,7 @@ export default function AlcoholTracker() {
               >
                 {drink ? '🍺' : dry ? '✓' : ''}
               </button>
-              <span style={{ fontSize: 9, fontFamily: 'var(--font-mono)', color: 'var(--muted)' }}>{DAY_NAMES[i]}</span>
+              <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--muted)' }}>{DAY_NAMES[i]}</span>
             </div>
           )
         })}
@@ -84,19 +84,19 @@ export default function AlcoholTracker() {
 
       <div style={{ borderTop: '1px solid var(--border)', paddingTop: 12 }}>
         <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 4 }}>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: 2, color: 'var(--muted)', textTransform: 'uppercase' }}>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 2, color: 'var(--muted)', textTransform: 'uppercase' }}>
             Alcohol-free since {fmtShort(AF_START)}
           </span>
           <span style={{ fontFamily: 'var(--font-display)', fontSize: 28, lineHeight: 1, color: afColor }}>
             {af.pct.toFixed(0)}%
           </span>
         </div>
-        <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>
+        <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>
           {af.afDays}/{af.elapsed} days · goal {af.goalPct}% by {fmtShort(AF_TARGET_DATE)} · {af.daysLeft}d left
         </p>
         <AfSparkline series={series} goal={af.goalPct} color={afColor} />
         {wins.weeks.length > 0 && (
-          <p style={{ fontSize: 11, color: 'var(--text2)', fontFamily: 'var(--font-mono)', marginTop: 8 }}>
+          <p style={{ fontSize: 12, color: 'var(--text2)', fontFamily: 'var(--font-mono)', marginTop: 8 }}>
             🏆 {wins.wins}/{wins.weeks.length} completed weeks at or under the cap
           </p>
         )}

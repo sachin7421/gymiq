@@ -59,7 +59,7 @@ export default function Workouts() {
   return (
     <>
       <header style={{ margin: '32px 0 16px' }}>
-        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 4 }}>WORKOUT</p>
+        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 4 }}>WORKOUT</p>
         <h2 style={{ fontSize: 36 }}>{isRehab ? '🧘 Back / Egoscue' : `${day?.icon || '💪'} ${day?.name || 'Loading…'}`}</h2>
       </header>
 
@@ -70,7 +70,7 @@ export default function Workouts() {
           <button className="secondary" onClick={() => changeDay(-1)} style={{ width: 36, height: 36, padding: 0, fontSize: 18 }}>‹</button>
           <div style={{ flex: 1, textAlign: 'center' }}>
             <p style={{ fontFamily: 'var(--font-display)', fontSize: 24 }}>{DOW_NAMES[dow]}</p>
-            <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
+            <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
               {dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
               {isToday && <span style={{ color: 'var(--accent)', marginLeft: 6, letterSpacing: 1 }}>· TODAY</span>}
             </p>
@@ -88,7 +88,7 @@ export default function Workouts() {
               key={r}
               onClick={() => setRoutine(r)}
               className={routine === r ? '' : 'secondary'}
-              style={{ flex: 1, padding: '9px 4px', fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap' }}
+              style={{ flex: 1, padding: '9px 4px', fontSize: 14, fontWeight: 600, whiteSpace: 'nowrap' }}
             >
               {label}
             </button>
@@ -100,7 +100,7 @@ export default function Workouts() {
         <EgoscueMenu />
       ) : exercises.length === 0 ? (
         <div className="card">
-          <p style={{ fontSize: 13, color: 'var(--muted)', textAlign: 'center' }}>
+          <p style={{ fontSize: 14, color: 'var(--muted)', textAlign: 'center' }}>
             No exercises generated for this day. Try updating your equipment in Settings.
           </p>
         </div>

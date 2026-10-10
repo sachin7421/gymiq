@@ -79,7 +79,7 @@ export default function WorkoutHeatmap() {
     <div className="card">
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 10 }}>
         <p className="card-title" style={{ marginBottom: 0 }}>📅 Consistency</p>
-        <span style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
+        <span style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
           last {WEEKS}w
         </span>
       </div>
@@ -104,7 +104,7 @@ export default function WorkoutHeatmap() {
         ))}
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 12, fontSize: 11, fontFamily: 'var(--font-mono)' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 12, fontSize: 12, fontFamily: 'var(--font-mono)' }}>
         <span style={{ color: 'var(--muted)' }}>{totalSessions} sessions</span>
         <span style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'var(--muted)' }}>
           less {COLORS.map((c, i) => (

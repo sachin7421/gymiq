@@ -18,9 +18,9 @@ export default function Plan() {
   return (
     <>
       <header style={{ margin: '32px 0 16px' }}>
-        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 4 }}>WEEKLY PLAN</p>
+        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 4 }}>WEEKLY PLAN</p>
         <h2 style={{ fontSize: 36 }}>{state.trainingDays}-day split</h2>
-        <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 4 }}>
+        <p style={{ fontSize: 13, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 4 }}>
           {state.fitnessLevel} · {state.equipment?.length || 0} equipment items
         </p>
       </header>
@@ -53,9 +53,9 @@ export default function Plan() {
               <div style={{ flex: 1 }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
                   <p style={{ fontFamily: 'var(--font-display)', fontSize: 22 }}>{w?.name || '—'}</p>
-                  {isToday && <span style={{ fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: 1.5, color: 'var(--accent)' }}>TODAY</span>}
+                  {isToday && <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 1.5, color: 'var(--accent)' }}>TODAY</span>}
                 </div>
-                <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>
+                <p style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--muted)', marginTop: 2 }}>
                   {DOW_SHORT[dow]}{!isRest && ` · A: ${aCount} ex · B: ${bCount} ex`}{cCount > 0 && ` · ⛳ ${cCount} ex`}
                 </p>
               </div>

@@ -32,13 +32,13 @@ export default function OuraCard() {
       </div>
 
       {error && (
-        <p style={{ fontSize: 12, color: 'var(--danger)', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>
+        <p style={{ fontSize: 13, color: 'var(--danger)', fontFamily: 'var(--font-mono)', marginBottom: 8 }}>
           {error}
         </p>
       )}
 
       {!data && loading && (
-        <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>Loading…</p>
+        <p style={{ fontSize: 13, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>Loading…</p>
       )}
 
       {data && (
@@ -54,7 +54,7 @@ export default function OuraCard() {
 
           {advice && (
             <p style={{
-              fontSize: 12,
+              fontSize: 13,
               padding: '8px 10px',
               background: 'var(--surface2)',
               borderRadius: 8,
@@ -70,7 +70,7 @@ export default function OuraCard() {
             <button className="secondary sm" onClick={applyActiveCalories} style={{ width: '100%' }}>
               Apply {data.activeCalories} active cal to burn tracker
               {data.activityDate && data.activityDate !== new Date().toISOString().slice(0, 10) && (
-                <span style={{ color: 'var(--muted)', fontFamily: 'var(--font-mono)', fontSize: 10, marginLeft: 6 }}>
+                <span style={{ color: 'var(--muted)', fontFamily: 'var(--font-mono)', fontSize: 11, marginLeft: 6 }}>
                   ({data.activityDate})
                 </span>
               )}
@@ -85,9 +85,9 @@ export default function OuraCard() {
 function Stat({ label, value, unit }) {
   return (
     <div style={{ background: 'var(--surface2)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--border)' }}>
-      <p style={{ fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: 1.5, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 2 }}>{label}</p>
+      <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 1.5, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 2 }}>{label}</p>
       <p style={{ fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 500 }}>
-        {value != null ? value : '—'}{value != null && unit ? <span style={{ fontSize: 10, color: 'var(--muted)', marginLeft: 2 }}>{unit}</span> : null}
+        {value != null ? value : '—'}{value != null && unit ? <span style={{ fontSize: 11, color: 'var(--muted)', marginLeft: 2 }}>{unit}</span> : null}
       </p>
     </div>
   )

@@ -64,7 +64,7 @@ export default function AppleHealthImport() {
     <div className="card">
       <p className="card-title">🍎 Apple Health</p>
 
-      <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 10, lineHeight: 1.5 }}>
+      <p style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 10, lineHeight: 1.5 }}>
         On your iPhone: Health app → tap your photo (top-right) → <strong>Export All Health Data</strong>.
         AirDrop / email the .zip to yourself, then drop it here. We extract steps, sleep,
         HRV, resting HR, body weight, VO2 max, and recent workouts.
@@ -88,7 +88,7 @@ export default function AppleHealthImport() {
         <p style={{ fontSize: 14, color: 'var(--text)', marginBottom: 4 }}>
           {busy ? '⏳ Processing…' : '📥 Drop export.zip here or click to choose'}
         </p>
-        <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
+        <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
           Accepts .zip or pre-extracted export.xml
         </p>
         <input
@@ -101,13 +101,13 @@ export default function AppleHealthImport() {
       </div>
 
       {progress && (
-        <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 8 }}>
+        <p style={{ fontSize: 13, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 8 }}>
           {progress.label}
         </p>
       )}
 
       {error && (
-        <p style={{ fontSize: 12, color: 'var(--danger)', fontFamily: 'var(--font-mono)', marginTop: 8 }}>
+        <p style={{ fontSize: 13, color: 'var(--danger)', fontFamily: 'var(--font-mono)', marginTop: 8 }}>
           {error}
         </p>
       )}
@@ -119,7 +119,7 @@ export default function AppleHealthImport() {
           background: 'var(--accent-light)',
           borderRadius: 8,
           borderLeft: '3px solid var(--accent)',
-          fontSize: 12,
+          fontSize: 13,
           color: 'var(--text)',
           lineHeight: 1.5,
         }}>
@@ -130,7 +130,7 @@ export default function AppleHealthImport() {
       )}
 
       {dayCount > 0 && !busy && (
-        <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 10 }}>
+        <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 10 }}>
           {dayCount} days on file
           {state.lastHealthImport && ` · last import ${new Date(state.lastHealthImport).toLocaleString()}`}
         </p>

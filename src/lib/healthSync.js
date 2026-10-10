@@ -64,7 +64,12 @@ export function mergeHealthDaily(state, rows) {
   return { next: { ...state, healthData, lastHealthSync: latest }, changed: true, latest }
 }
 
-// Ready-to-paste JSON body for the Shortcut's "Get Contents of URL" action.
-export function shortcutBodyExample(token) {
-  return JSON.stringify({ token, date: 'YYYY-MM-DD', steps: 0 }, null, 2)
+// Personal one-link setup: token + device timezone ride along as query params so
+// the Shortcut only has to POST { steps }. Date defaults to "today" server-side.
+export function personalSyncUrl(token) {
+  let tz = ''
+  try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '' } catch { /* ignore */ }
+  const q = new URLSearchParams({ token })
+  if (tz) q.set('tz', tz)
+  return `${INGEST_URL}?${q}`
 }

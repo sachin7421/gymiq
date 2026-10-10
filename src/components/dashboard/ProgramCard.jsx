@@ -21,7 +21,7 @@ export default function ProgramCard() {
         <span style={{ fontFamily: 'var(--font-display)', fontSize: 44, lineHeight: 1, color: 'var(--accent)' }}>
           {notStarted ? '—' : `Day ${day}`}
         </span>
-        <span style={{ fontSize: 12, color: 'var(--muted)' }}>
+        <span style={{ fontSize: 13, color: 'var(--muted)' }}>
           of {PROGRAM_TOTAL_DAYS} · {notStarted ? `starts in ${daysUntil(PROGRAM.start, today)}d` : `${daysLeft}d left`}
         </span>
       </div>
@@ -45,10 +45,10 @@ export default function ProgramCard() {
             }}>
               <span style={{ fontSize: 18 }}>{cp.icon}</span>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <p style={{ fontSize: 13, fontWeight: 600, textDecoration: status === 'past' ? 'line-through' : 'none' }}>{cp.label}</p>
-                <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>{cp.when} · {range}</p>
+                <p style={{ fontSize: 14, fontWeight: 600, textDecoration: status === 'past' ? 'line-through' : 'none' }}>{cp.label}</p>
+                <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>{cp.when} · {range}</p>
               </div>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: 1, color: s.color, textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 1, color: s.color, textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
                 {status === 'upcoming' ? `in ${until}d` : s.label}
               </span>
             </div>

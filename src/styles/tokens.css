@@ -4,8 +4,8 @@
   --surface2: #f0f0eb;
   --border: #e0e0d8;
   --text: #1a1a1a;
-  --text2: #444444;
-  --muted: #888888;
+  --text2: #2e2e2e;
+  --muted: #5a5a5a;
   --accent: #2a7d4f;
   --accent2: #e05c1a;
   --accent3: #1a6fa8;
@@ -74,7 +74,7 @@ button.outline {
   color: var(--accent);
   border: 1.5px solid var(--accent);
 }
-button.sm { padding: 6px 12px; font-size: 12px; }
+button.sm { padding: 7px 12px; font-size: 13px; }
 
 input[type="text"], input[type="number"], input[type="email"], input[type="password"] {
   background: var(--surface2);
@@ -108,7 +108,7 @@ input::placeholder { color: var(--muted); }
 
 .card-title {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
   color: var(--muted);

@@ -54,11 +54,11 @@ export default function WeightCard() {
         {lastWaist && (
           <span style={{ marginLeft: 'auto', textAlign: 'right' }}>
             <span style={{ fontFamily: 'var(--font-display)', fontSize: 34, lineHeight: 1, color: 'var(--accent3)' }}>{lastWaist.waist}</span>
-            <span style={{ fontSize: 12, color: 'var(--muted)', marginLeft: 4 }}>in waist</span>
+            <span style={{ fontSize: 13, color: 'var(--muted)', marginLeft: 4 }}>in waist</span>
           </span>
         )}
       </div>
-      <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 12 }}>
+      <p style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 12 }}>
         Goal {state.goalWeight} · <span style={{ color: 'var(--accent2)', fontWeight: 600 }}>{remaining} lbs to go</span> · {lost.toFixed(1)} lost · Day {daysSinceStart(state.startDate)}
       </p>
       <div style={{ height: 10, background: 'var(--surface2)', borderRadius: 100, overflow: 'hidden', border: '1px solid var(--border)', marginBottom: 12 }}>
@@ -103,7 +103,7 @@ export default function WeightCard() {
 function WaistTrend({ history, first, last, age }) {
   if (!last) {
     return (
-      <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 8 }}>
+      <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 8 }}>
         Measure your waist once a week at the navel — separates fat loss from creatine water.
       </p>
     )
@@ -122,10 +122,10 @@ function WaistTrend({ history, first, last, age }) {
   return (
     <div style={{ marginTop: 10 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 2 }}>
-        <span style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
+        <span style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
           Waist · last logged {age === 0 ? 'today' : `${age}d ago`}
         </span>
-        <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: deltaColor, fontWeight: 600 }}>
+        <span style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: deltaColor, fontWeight: 600 }}>
           {delta > 0 ? '+' : ''}{delta.toFixed(1)} in since {first.date.slice(5)}
         </span>
       </div>

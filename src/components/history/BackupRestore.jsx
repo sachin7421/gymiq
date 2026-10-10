@@ -57,7 +57,7 @@ export default function BackupRestore() {
   return (
     <div className="card">
       <p className="card-title">Backup & restore</p>
-      <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 12 }}>
+      <p style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 12 }}>
         Export a JSON snapshot to keep, or import one to restore. Cloud sync runs automatically.
       </p>
       <div style={{ display: 'flex', gap: 8 }}>
@@ -66,7 +66,7 @@ export default function BackupRestore() {
         <input ref={fileRef} type="file" accept="application/json" onChange={importJson} style={{ display: 'none' }} />
       </div>
       {msg && (
-        <p style={{ fontSize: 12, marginTop: 10, fontFamily: 'var(--font-mono)', color: msg.ok ? 'var(--success)' : 'var(--danger)' }}>
+        <p style={{ fontSize: 13, marginTop: 10, fontFamily: 'var(--font-mono)', color: msg.ok ? 'var(--success)' : 'var(--danger)' }}>
           {msg.text}
         </p>
       )}

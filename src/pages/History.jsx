@@ -30,7 +30,7 @@ export default function History() {
   return (
     <>
       <header style={{ margin: '32px 0 16px' }}>
-        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 4 }}>HISTORY</p>
+        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 4 }}>HISTORY</p>
         <h2 style={{ fontSize: 36 }}>Progress</h2>
       </header>
 
@@ -48,7 +48,7 @@ export default function History() {
       <div className="card">
         <p className="card-title">Workouts logged</p>
         <p style={{ fontFamily: 'var(--font-display)', fontSize: 48, color: 'var(--accent)', lineHeight: 1 }}>{completedCount}</p>
-        <p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 4 }}>Sessions completed since {state.startDate || 'start'}</p>
+        <p style={{ fontSize: 13, color: 'var(--muted)', marginTop: 4 }}>Sessions completed since {state.startDate || 'start'}</p>
       </div>
 
       <WeeklyScorecard />
@@ -63,7 +63,7 @@ export default function History() {
 function Stat({ label, value, small }) {
   return (
     <div style={{ background: 'var(--surface2)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--border)' }}>
-      <p style={{ fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: 1.5, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 2 }}>{label}</p>
+      <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 1.5, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 2 }}>{label}</p>
       <p style={{ fontFamily: 'var(--font-mono)', fontSize: small ? 12 : 16, fontWeight: 500 }}>{value}</p>
     </div>
   )

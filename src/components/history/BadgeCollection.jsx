@@ -43,7 +43,7 @@ export default function BadgeCollection() {
               }}
             >
               <p style={{ fontSize: 26, marginBottom: 4 }}>{b.icon}</p>
-              <p style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: got ? 'var(--accent)' : 'var(--muted)', lineHeight: 1.2 }}>
+              <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: got ? 'var(--accent)' : 'var(--muted)', lineHeight: 1.2 }}>
                 {b.name}
               </p>
             </div>

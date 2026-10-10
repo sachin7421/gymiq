@@ -58,8 +58,8 @@ legacy/         original index.html (3,283 lines) — reference only
 Two Supabase Edge Functions live in `supabase/functions/` and are deployed with
 `verify_jwt = false` (each implements its own auth):
 
-- **`ingest-health`** — an iOS Shortcuts automation POSTs `{ token, date, steps }`
-  here twice a day. Token comes from Settings → *Apple Health auto-sync*. Rows land
+- **`ingest-health`** — a 3-action iOS Shortcut POSTs `{ steps }` to a personal link
+  (`?token=…&tz=…`, from Settings → *Apple Health auto-sync*); date defaults to "today" in that tz. Rows land
   in `public.health_daily`; the app merges them into `healthData` on load/focus.
 - **`send-reminders`** — Web Push. `GET ?vapid=1` returns the public key (the
   function generates and stores the VAPID pair in `app_config` on first run, so the

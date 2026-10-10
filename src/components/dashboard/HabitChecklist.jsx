@@ -51,7 +51,7 @@ export default function HabitChecklist() {
         <span style={{ fontFamily: 'var(--font-display)', fontSize: 56, color: 'var(--accent)', lineHeight: 1 }}>{points}</span>
         <span style={{ fontFamily: 'var(--font-display)', fontSize: 18, color: 'var(--muted)' }}>/{MAX_PTS}</span>
       </div>
-      <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 10 }}>{label}</p>
+      <p style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 10 }}>{label}</p>
       <div style={{ height: 8, background: 'var(--surface2)', borderRadius: 100, overflow: 'hidden', border: '1px solid var(--border)', marginBottom: 14 }}>
         <div style={{
           height: '100%',
@@ -77,7 +77,7 @@ export default function HabitChecklist() {
                 background: on ? 'var(--accent-light)' : 'var(--surface2)',
                 color: 'var(--text2)',
                 border: `1.5px solid ${on ? 'var(--accent)' : 'var(--border)'}`,
-                fontSize: 13,
+                fontSize: 14,
                 fontWeight: 400,
                 textAlign: 'left',
               }}
@@ -87,7 +87,7 @@ export default function HabitChecklist() {
                 border: `2px solid ${on ? 'var(--accent)' : 'var(--border)'}`,
                 background: on ? 'var(--accent)' : 'var(--surface)',
                 color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: 12, flexShrink: 0,
+                fontSize: 13, flexShrink: 0,
               }}>
                 {on ? '✓' : ''}
               </span>
@@ -95,7 +95,7 @@ export default function HabitChecklist() {
               <span style={{ flex: 1 }}>{h.label}</span>
               <span style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: 11,
+                fontSize: 12,
                 color: on ? 'var(--accent)' : 'var(--muted)',
                 fontWeight: on ? 600 : 400,
               }}>

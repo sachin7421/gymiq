@@ -43,7 +43,7 @@ export default function ExerciseItem({ exercise, dateKey, showSectionBadge }) {
       {showSectionBadge && badge && (
         <div style={{ padding: '8px 14px 0' }}>
           <span style={{
-            fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: 2,
+            fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 2,
             textTransform: 'uppercase', padding: '3px 10px', borderRadius: 100,
             color: badge.color, border: `1px solid ${badge.color}55`,
             background: badge.color + '22',
@@ -65,7 +65,7 @@ export default function ExerciseItem({ exercise, dateKey, showSectionBadge }) {
         <span style={{ fontSize: 22 }}>{exercise.icon}</span>
         <div style={{ flex: 1 }}>
           <p style={{ fontSize: 14, fontWeight: 600 }}>{exercise.name}</p>
-          <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 2 }}>{exercise.detail}</p>
+          <p style={{ fontSize: 13, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 2 }}>{exercise.detail}</p>
         </div>
         <span style={{
           width: 24, height: 24, borderRadius: '50%',
@@ -73,7 +73,7 @@ export default function ExerciseItem({ exercise, dateKey, showSectionBadge }) {
           background: done ? 'var(--accent)' : 'var(--surface)',
           color: '#fff',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 13, flexShrink: 0,
+          fontSize: 14, flexShrink: 0,
         }}>
           {done ? '✓' : ''}
         </span>
@@ -82,7 +82,7 @@ export default function ExerciseItem({ exercise, dateKey, showSectionBadge }) {
       {exercise.cue && (
         <p style={{
           padding: '0 14px 10px',
-          fontSize: 12,
+          fontSize: 13,
           color: 'var(--text2)',
           lineHeight: 1.5,
           fontStyle: 'italic',
@@ -102,7 +102,7 @@ export default function ExerciseItem({ exercise, dateKey, showSectionBadge }) {
             color: 'var(--text2)',
             padding: '6px 12px',
             borderRadius: 10,
-            fontSize: 12,
+            fontSize: 13,
             textDecoration: 'none',
             display: 'inline-flex',
             alignItems: 'center',

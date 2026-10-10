@@ -25,7 +25,7 @@ export default function PRCard() {
 
       {prs.length > 0 && (
         <>
-          <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)', letterSpacing: 1, marginBottom: 6 }}>
+          <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)', letterSpacing: 1, marginBottom: 6 }}>
             RECENT PRS
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: top.length > 0 ? 14 : 0 }}>
@@ -37,10 +37,10 @@ export default function PRCard() {
               }}>
                 <span style={{ fontSize: 16 }}>{EX_DB[pr.exerciseId]?.icon || '💪'}</span>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ fontSize: 13, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  <p style={{ fontSize: 14, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {exerciseName(pr.exerciseId)}
                   </p>
-                  <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
+                  <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
                     {pr.set?.weight} × {pr.set?.reps}
                     {pr.set?.rpe ? ` @ ${pr.set.rpe}` : ''} · {fmtDateShort(pr.dateKey)}
                   </p>
@@ -49,7 +49,7 @@ export default function PRCard() {
                   <p style={{ fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 600, color: 'var(--accent)' }}>
                     {Math.round(pr.e1rm)}
                   </p>
-                  <p style={{ fontSize: 9, color: 'var(--muted)', fontFamily: 'var(--font-mono)', letterSpacing: 1 }}>
+                  <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)', letterSpacing: 1 }}>
                     e1RM
                   </p>
                 </div>
@@ -61,7 +61,7 @@ export default function PRCard() {
 
       {top.length > 0 && (
         <>
-          <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)', letterSpacing: 1, marginBottom: 6 }}>
+          <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)', letterSpacing: 1, marginBottom: 6 }}>
             TOP LIFTS
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
@@ -70,14 +70,14 @@ export default function PRCard() {
                 display: 'flex', alignItems: 'center', gap: 8,
                 padding: '6px 4px', borderBottom: i < top.length - 1 ? '1px solid var(--border)' : 'none',
               }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--muted)', width: 20 }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--muted)', width: 20 }}>
                   #{i + 1}
                 </span>
                 <span style={{ fontSize: 14 }}>{EX_DB[t.exerciseId]?.icon || '💪'}</span>
-                <span style={{ flex: 1, fontSize: 13, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <span style={{ flex: 1, fontSize: 14, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {exerciseName(t.exerciseId)}
                 </span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 600 }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 14, fontWeight: 600 }}>
                   {Math.round(t.e1rm)}
                 </span>
               </div>

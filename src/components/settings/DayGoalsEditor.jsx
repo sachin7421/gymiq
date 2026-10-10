@@ -45,7 +45,7 @@ export default function DayGoalsEditor() {
   return (
     <div className="card">
       <p className="card-title">🎯 Per-day goals</p>
-      <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 12, lineHeight: 1.5 }}>
+      <p style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 12, lineHeight: 1.5 }}>
         Pick a goal for each day. Workouts adapt their rep schemes, exercise selection,
         and rest periods to match. Health data (Oura, Apple Health) modulates intensity day-of.
       </p>
@@ -72,7 +72,7 @@ export default function DayGoalsEditor() {
                     <span style={{ fontFamily: 'var(--font-display)', fontSize: 18, color: def.color }}>
                       {def.icon} {DOW_NAMES[dow]}
                     </span>
-                    <span style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
+                    <span style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
                       {def.label}
                     </span>
                   </div>
@@ -84,7 +84,7 @@ export default function DayGoalsEditor() {
                         className={dg.goal === key ? '' : 'secondary'}
                         style={{
                           padding: '4px 10px',
-                          fontSize: 11,
+                          fontSize: 12,
                           background: dg.goal === key ? g.color : 'var(--surface2)',
                           color: dg.goal === key ? '#fff' : 'var(--text)',
                           border: dg.goal === key ? 'none' : '1.5px solid var(--border)',
@@ -101,7 +101,7 @@ export default function DayGoalsEditor() {
                           key={key}
                           onClick={() => setFocus(dow, key)}
                           className={dg.focus === key ? '' : 'secondary'}
-                          style={{ padding: '3px 9px', fontSize: 10 }}
+                          style={{ padding: '3px 9px', fontSize: 11 }}
                         >
                           {f.label}
                         </button>

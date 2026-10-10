@@ -17,7 +17,7 @@ export default function LevelBanner() {
         <span style={{ fontSize: 32 }}>{lvl.icon}</span>
         <div style={{ flex: 1 }}>
           <p style={{ fontFamily: 'var(--font-display)', fontSize: 26, color: lvl.color, lineHeight: 1 }}>{lvl.title}</p>
-          <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 2 }}>
+          <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 2 }}>
             {nextLvl ? `${total} pts — ${nextLvl.min - total} to ${nextLvl.title}` : `${total} pts — MAX LEVEL`}
           </p>
         </div>
@@ -25,7 +25,7 @@ export default function LevelBanner() {
           <p style={{ fontFamily: 'var(--font-display)', fontSize: 32, color: grade.color, lineHeight: 1 }}>
             {wk.days > 0 ? grade.grade : '—'}
           </p>
-          <p style={{ fontSize: 9, color: 'var(--muted)', fontFamily: 'var(--font-mono)', letterSpacing: 1, marginTop: 2 }}>WEEK</p>
+          <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)', letterSpacing: 1, marginTop: 2 }}>WEEK</p>
         </div>
       </div>
       <div style={{ height: 8, background: 'var(--surface2)', borderRadius: 100, overflow: 'hidden' }}>

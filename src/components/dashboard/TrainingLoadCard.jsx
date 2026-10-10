@@ -53,7 +53,7 @@ export default function TrainingLoadCard() {
         <p className="card-title" style={{ marginBottom: 0 }}>📈 Training Load</p>
         {prevWeek?.volume > 0 && (
           <span style={{
-            fontSize: 11,
+            fontSize: 12,
             fontFamily: 'var(--font-mono)',
             color: wow > 0 ? 'var(--accent)' : wow < 0 ? 'var(--accent2)' : 'var(--muted)',
           }}>
@@ -84,7 +84,7 @@ export default function TrainingLoadCard() {
         })}
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
         <span>{fmtWeek(buckets[0].startKey)}</span>
         <span>this week</span>
       </div>
@@ -100,10 +100,10 @@ export default function TrainingLoadCard() {
 function Stat({ label, value, unit }) {
   return (
     <div style={{ background: 'var(--surface2)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--border)' }}>
-      <p style={{ fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: 1.5, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 2 }}>{label}</p>
+      <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 1.5, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 2 }}>{label}</p>
       <p style={{ fontFamily: 'var(--font-mono)', fontSize: 16, fontWeight: 500 }}>
         {value}
-        {unit && <span style={{ fontSize: 10, color: 'var(--muted)', marginLeft: 3 }}>{unit}</span>}
+        {unit && <span style={{ fontSize: 11, color: 'var(--muted)', marginLeft: 3 }}>{unit}</span>}
       </p>
     </div>
   )

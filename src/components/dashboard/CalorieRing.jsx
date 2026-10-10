@@ -53,10 +53,10 @@ export default function CalorieRing() {
           </svg>
           <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
             <p style={{ fontFamily: 'var(--font-mono)', fontSize: 14, fontWeight: 500 }}>{consumed}</p>
-            <p style={{ fontSize: 9, color: 'var(--muted)' }}>eaten</p>
+            <p style={{ fontSize: 11, color: 'var(--muted)' }}>eaten</p>
           </div>
         </div>
-        <div style={{ flex: 1, fontSize: 13 }}>
+        <div style={{ flex: 1, fontSize: 14 }}>
           <CalRow label="Eaten" value={consumed} />
           <CalRow label="Burned" value={burned} color="var(--accent)" />
           <CalRow label={over ? 'Over' : 'Remaining'} value={remaining} color={over ? 'var(--danger)' : 'var(--text)'} />
@@ -66,12 +66,12 @@ export default function CalorieRing() {
       <div style={{ display: 'flex', gap: 8, marginBottom: 6 }}>
         <input type="number" inputMode="numeric" placeholder="+ eaten" value={eat}
           onChange={e => setEat(e.target.value)} onKeyDown={e => e.key === 'Enter' && addCalories()} />
-        <button onClick={addCalories} className="orange" style={{ flexShrink: 0, padding: '10px 14px', fontSize: 13 }}>Eat</button>
+        <button onClick={addCalories} className="orange" style={{ flexShrink: 0, padding: '10px 14px', fontSize: 14 }}>Eat</button>
       </div>
       <div style={{ display: 'flex', gap: 8 }}>
         <input type="number" inputMode="numeric" placeholder="+ burned" value={burn}
           onChange={e => setBurn(e.target.value)} onKeyDown={e => e.key === 'Enter' && addBurned()} />
-        <button onClick={addBurned} style={{ flexShrink: 0, padding: '10px 14px', fontSize: 13 }}>Burn</button>
+        <button onClick={addBurned} style={{ flexShrink: 0, padding: '10px 14px', fontSize: 14 }}>Burn</button>
       </div>
       <button className="secondary sm" onClick={reset} style={{ marginTop: 8, width: '100%' }}>Reset today</button>
     </div>

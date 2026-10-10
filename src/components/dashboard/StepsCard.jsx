@@ -53,13 +53,13 @@ export default function StepsCard() {
     <div className="card">
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <p className="card-title" style={{ flex: 1 }}>Steps</p>
-        {sourceLabel && <span style={{ fontFamily: 'var(--font-mono)', fontSize: 9, letterSpacing: 1, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 14 }}>{sourceLabel}</span>}
+        {sourceLabel && <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 1, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 14 }}>{sourceLabel}</span>}
       </div>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginBottom: 4 }}>
         <span style={{ fontFamily: 'var(--font-display)', fontSize: 52, lineHeight: 1, color: style.color }}>
           {todaySteps == null ? '—' : todaySteps.toLocaleString()}
         </span>
-        <span style={{ fontSize: 12, color: 'var(--muted)' }}>
+        <span style={{ fontSize: 13, color: 'var(--muted)' }}>
           {tier === 'target' ? 'target hit ✓' : tier === 'none' ? `floor ${STEPS_FLOOR.toLocaleString()} · target ${STEPS_TARGET.toLocaleString()}` : `${(STEPS_TARGET - todaySteps).toLocaleString()} to target`}
         </span>
       </div>
@@ -71,13 +71,13 @@ export default function StepsCard() {
 
       {/* Night-walk nudge: the thing to do right now */}
       {tier !== 'target' && todaySteps != null && (
-        <p style={{ fontSize: 13, color: evening ? 'var(--accent2)' : 'var(--text2)', fontWeight: evening ? 600 : 400, marginBottom: 10 }}>
+        <p style={{ fontSize: 14, color: evening ? 'var(--accent2)' : 'var(--text2)', fontWeight: evening ? 600 : 400, marginBottom: 10 }}>
           🚶 {evening ? 'Night walk: ' : ''}~{mins} min easy walk gets you to {STEPS_TARGET.toLocaleString()}.
         </p>
       )}
 
       {!hasAutoSetup && (
-        <p style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.45, marginBottom: 10 }}>
+        <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.45, marginBottom: 10 }}>
           Steps can fill in automatically from Apple Health. <Link to="/settings" style={{ color: 'var(--accent3)' }}>Set up the 3-minute Shortcut →</Link>
         </p>
       )}
@@ -99,7 +99,7 @@ export default function StepsCard() {
                 style={{
                   width: '100%', height: 40, padding: 0, borderRadius: 8,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontFamily: 'var(--font-mono)', fontSize: 10, fontWeight: 600,
+                  fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 600,
                   background: s.bg, color: s.color,
                   border: `1.5px solid ${t === 'none' ? 'var(--border)' : s.color}`,
                   boxShadow: isToday ? '0 0 0 2px var(--accent3)' : 'none',
@@ -108,17 +108,17 @@ export default function StepsCard() {
               >
                 {n == null ? '' : n >= 1000 ? `${(n / 1000).toFixed(1)}k` : n}
               </button>
-              <span style={{ fontSize: 9, fontFamily: 'var(--font-mono)', color: 'var(--muted)' }}>{DAY_NAMES[i]}</span>
+              <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--muted)' }}>{DAY_NAMES[i]}</span>
             </div>
           )
         })}
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 10, fontSize: 10, fontFamily: 'var(--font-mono)', color: 'var(--muted)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 10, fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--muted)' }}>
         <Legend color={STEPS_TIER_STYLE.below.color} label={`< ${STEPS_FLOOR.toLocaleString()}`} />
         <Legend color={STEPS_TIER_STYLE.between.color} label="floor" />
         <Legend color={STEPS_TIER_STYLE.target.color} label={`≥ ${STEPS_TARGET.toLocaleString()}`} />
-        <button type="button" className="secondary sm" onClick={() => setManualOpen(o => !o)} style={{ marginLeft: 'auto', padding: '3px 8px', fontSize: 10 }}>
+        <button type="button" className="secondary sm" onClick={() => setManualOpen(o => !o)} style={{ marginLeft: 'auto', padding: '3px 8px', fontSize: 11 }}>
           {manualOpen ? 'close' : 'enter manually'}
         </button>
       </div>

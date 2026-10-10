@@ -19,8 +19,8 @@ export default function WeeklyScorecard() {
       <p className="card-title">Weekly scorecard</p>
       <div style={{ textAlign: 'center', marginBottom: 14 }}>
         <p style={{ fontFamily: 'var(--font-display)', fontSize: 64, color: grade.color, lineHeight: 1 }}>{grade.grade}</p>
-        <p style={{ fontSize: 12, color: 'var(--muted)' }}>{grade.label}</p>
-        <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 4 }}>
+        <p style={{ fontSize: 13, color: 'var(--muted)' }}>{grade.label}</p>
+        <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 4 }}>
           {total} / {possible} pts this week
         </p>
       </div>
@@ -34,13 +34,13 @@ export default function WeeklyScorecard() {
             s > 0 ? 'var(--accent2)' : 'var(--border)'
           return (
             <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' }}>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: s > 0 ? col : 'var(--muted)', marginBottom: 4 }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: s > 0 ? col : 'var(--muted)', marginBottom: 4 }}>
                 {s > 0 ? s : ''}
               </span>
               <div style={{ flex: 1, width: '100%', display: 'flex', alignItems: 'flex-end' }}>
                 <div style={{ width: '100%', height: `${pct}%`, background: col, borderRadius: 4, transition: 'height 0.6s' }} />
               </div>
-              <span style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: 'var(--muted)', marginTop: 4 }}>{DAY_LABELS[i]}</span>
+              <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--muted)', marginTop: 4 }}>{DAY_LABELS[i]}</span>
             </div>
           )
         })}

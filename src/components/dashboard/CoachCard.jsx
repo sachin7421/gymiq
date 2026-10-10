@@ -35,11 +35,11 @@ export default function CoachCard() {
     return (
       <div className="card">
         <p className="card-title">🧠 Coach</p>
-        <p style={{ fontSize: 13, color: 'var(--text2)', marginBottom: 8, lineHeight: 1.5 }}>
+        <p style={{ fontSize: 14, color: 'var(--text2)', marginBottom: 8, lineHeight: 1.5 }}>
           Get a personal coach that knows your training data. Add an Anthropic
           API key in Settings to enable.
         </p>
-        <p style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
+        <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)' }}>
           Key stays in your account — only sent to Anthropic when you ask a question.
         </p>
       </div>
@@ -76,7 +76,7 @@ export default function CoachCard() {
               key={i}
               onClick={() => { setQuestion(s); ask(s) }}
               className="secondary sm"
-              style={{ fontSize: 11, padding: '4px 10px' }}
+              style={{ fontSize: 12, padding: '4px 10px' }}
             >
               {s}
             </button>
@@ -85,7 +85,7 @@ export default function CoachCard() {
       )}
 
       {error && (
-        <p style={{ fontSize: 12, color: 'var(--danger)', fontFamily: 'var(--font-mono)', marginTop: 8 }}>
+        <p style={{ fontSize: 13, color: 'var(--danger)', fontFamily: 'var(--font-mono)', marginTop: 8 }}>
           {error}
         </p>
       )}
@@ -97,7 +97,7 @@ export default function CoachCard() {
           background: 'var(--surface2)',
           borderRadius: 10,
           borderLeft: '3px solid var(--accent)',
-          fontSize: 13,
+          fontSize: 14,
           lineHeight: 1.6,
           color: 'var(--text)',
           whiteSpace: 'pre-wrap',
@@ -107,7 +107,7 @@ export default function CoachCard() {
       )}
 
       {loading && (
-        <p style={{ fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 8 }}>
+        <p style={{ fontSize: 13, color: 'var(--muted)', fontFamily: 'var(--font-mono)', marginTop: 8 }}>
           Thinking…
         </p>
       )}

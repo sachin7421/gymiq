@@ -23,13 +23,13 @@ export default function Dashboard() {
   return (
     <>
       <header style={{ margin: '32px 0 16px' }}>
-        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 4 }}>
+        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: 3, color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 4 }}>
           {state.userName ? `Hey, ${state.userName}` : 'Today'}
         </p>
         <h1 style={{ fontSize: 'clamp(40px,9vw,64px)' }}>
           Day <span style={{ color: 'var(--accent)' }}>{daysSinceStart(state.startDate)}</span>
         </h1>
-        <p style={{ fontSize: 13, color: 'var(--text2)', fontStyle: 'italic', lineHeight: 1.45, marginTop: 8, maxWidth: 520 }}>
+        <p style={{ fontSize: 14, color: 'var(--text2)', fontStyle: 'italic', lineHeight: 1.45, marginTop: 8, maxWidth: 520 }}>
           “{quoteFor(todayStr())}”
         </p>
         <SyncBadge status={syncStatus} />
@@ -61,7 +61,7 @@ function SyncBadge({ status }) {
   }
   const m = map[status] || map.idle
   return (
-    <p style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: 2, color: m.color, marginTop: 6 }}>
+    <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 2, color: m.color, marginTop: 6 }}>
       · {m.label}
     </p>
   )
