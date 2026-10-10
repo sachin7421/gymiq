@@ -107,16 +107,31 @@ Deno.serve(async (req: Request) => {
   if (req.method !== "POST") return json({ error: "POST only" }, 405);
 
   const url = new URL(req.url);
-  const body = (await req.json().catch(() => null)) as Record<string, unknown> | null;
-  if (!body || typeof body !== "object") return json({ error: "invalid JSON body" }, 400);
+  const rawText = await req.text().catch(() => "");
+  let parsed: unknown = null;
+  try { parsed = JSON.parse(rawText); } catch { parsed = null; }
+  const body = (parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : null) as Record<string, unknown> | null;
 
-  const token = url.searchParams.get("token") || req.headers.get("x-ingest-token") || body.token;
-  if (!token || typeof token !== "string") return json({ error: "missing token" }, 401);
+  const token = url.searchParams.get("token") || req.headers.get("x-ingest-token") || body?.token;
 
   const sb = createClient(
     Deno.env.get("SUPABASE_URL")!,
     Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
   );
+
+  // Best-effort request trace (service-role only table) so setup problems on
+  // the phone can be diagnosed without the platform log explorer.
+  const trace = async (result: string) => {
+    const redacted: Record<string, unknown> = body ? { ...body } : { _raw: rawText.slice(0, 500), _contentType: req.headers.get("content-type") };
+    delete redacted.token;
+    await sb.from("ingest_debug").insert({
+      has_token: !!token, tz: url.searchParams.get("tz"), body: redacted, result,
+      user_agent: req.headers.get("user-agent"),
+    }).then(() => {}, () => {});
+  };
+
+  if (!body) { await trace("invalid JSON body"); return json({ error: "invalid JSON body (set Request Body to JSON)" }, 400); }
+  if (!token || typeof token !== "string") { await trace("missing token"); return json({ error: "missing token" }, 401); }
 
   const { data: tok, error: tokErr } = await sb
     .from("ingest_tokens")
@@ -124,7 +139,7 @@ Deno.serve(async (req: Request) => {
     .eq("token", token)
     .maybeSingle();
   if (tokErr) return json({ error: tokErr.message }, 500);
-  if (!tok) return json({ error: "invalid token" }, 401);
+  if (!tok) { await trace("invalid token"); return json({ error: "invalid token" }, 401); }
 
   // Resolve the user's timezone for "today" defaults.
   let tz = url.searchParams.get("tz") || (typeof body.tz === "string" ? body.tz : "");
@@ -176,6 +191,7 @@ Deno.serve(async (req: Request) => {
     results.push({ date, steps: row.steps as number | null });
   }
 
-  if (results.length === 0) return json({ error: "no data — send at least { steps: <number> }" }, 400);
+  if (results.length === 0) { await trace("no data"); return json({ error: "no data — send at least { steps: <number> }" }, 400); }
+  await trace("ok " + JSON.stringify(results));
   return json({ ok: true, saved: results });
 });
