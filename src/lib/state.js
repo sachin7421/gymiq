@@ -49,6 +49,8 @@ export const DEFAULT_STATE = {
     alcohol: false,
     meditation: false,
     egoscue: false,
+    creatine: false,
+    magnesium: false,
   },
 
   // Points & gamification
@@ -81,6 +83,8 @@ export const DEFAULT_STATE = {
   // Last 90d of workouts pulled from HealthKit
   healthWorkouts: [],
   lastHealthImport: null,
+  // Newest updated_at seen from health_daily (iOS Shortcut auto-sync)
+  lastHealthSync: null,
 
   // Sync
   lastSync: null,

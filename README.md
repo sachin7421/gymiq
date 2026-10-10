@@ -52,3 +52,33 @@ legacy/         original index.html (3,283 lines) — reference only
 5. Weekly drink keys are date strings, Sunday = day 0.
 6. Exercise weight uses `onBlur` + explicit Save (mobile UX).
 7. Supabase save is debounced 1.5s.
+
+## Automation (Oct 2026)
+
+Two Supabase Edge Functions live in `supabase/functions/` and are deployed with
+`verify_jwt = false` (each implements its own auth):
+
+- **`ingest-health`** — an iOS Shortcuts automation POSTs `{ token, date, steps }`
+  here twice a day. Token comes from Settings → *Apple Health auto-sync*. Rows land
+  in `public.health_daily`; the app merges them into `healthData` on load/focus.
+- **`send-reminders`** — Web Push. `GET ?vapid=1` returns the public key (the
+  function generates and stores the VAPID pair in `app_config` on first run, so the
+  private key never leaves Supabase). `POST { test: true }` with a user JWT sends a
+  test push. Called by pg_cron every 15 min with `x-cron-secret` to deliver the
+  morning workout message and the night-walk/steps message per user's local time.
+
+Schedule (run once in SQL after the function is deployed):
+
+```sql
+select cron.schedule('gymiq-send-reminders', '*/15 * * * *', $$
+  select net.http_post(
+    url := 'https://pgzbwmwkchpvqvftfczm.supabase.co/functions/v1/send-reminders',
+    headers := jsonb_build_object('Content-Type', 'application/json',
+      'x-cron-secret', (select value from public.app_config where key = 'cron_secret')),
+    body := '{}'::jsonb)
+$$);
+```
+
+The service worker is a custom `src/sw.js` (vite-plugin-pwa `injectManifest`) so it
+can handle `push` / `notificationclick`. On iPhone, push only works once the app is
+added to the Home Screen.

@@ -5,6 +5,8 @@ import { supabase } from '../lib/supabase.js'
 import EquipmentGrid from '../components/settings/EquipmentGrid.jsx'
 import AppleHealthImport from '../components/settings/AppleHealthImport.jsx'
 import DayGoalsEditor from '../components/settings/DayGoalsEditor.jsx'
+import NotificationsCard from '../components/settings/NotificationsCard.jsx'
+import HealthSyncCard from '../components/settings/HealthSyncCard.jsx'
 import { generateWorkouts } from '../lib/workoutGenerator.js'
 import { testOuraToken } from '../lib/oura.js'
 import { todayStr } from '../lib/dateUtils.js'
@@ -189,6 +191,10 @@ export default function Settings() {
       </div>
 
       <DayGoalsEditor />
+
+      <NotificationsCard />
+
+      <HealthSyncCard />
 
       <AppleHealthImport />
 

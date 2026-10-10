@@ -10,6 +10,8 @@ export const HABIT_DEFS = [
   { key: 'noLateSnack', emoji: '🚫', label: 'No eating after 9pm', pts: 1 },
   { key: 'alcohol', emoji: '🍺', label: 'Alcohol-free day', pts: 1 },
   { key: 'egoscue', emoji: '🧘', label: 'Back / Egoscue menu', pts: 1 },
+  { key: 'creatine', emoji: '💊', label: 'Creatine (morning)', pts: 1 },
+  { key: 'magnesium', emoji: '🌙', label: 'Magnesium (night)', pts: 1 },
 ]
 
 export const MAX_PTS = HABIT_DEFS.reduce((a, h) => a + h.pts, 0)

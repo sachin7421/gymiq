@@ -12,10 +12,13 @@ import TrainingLoadCard from '../components/dashboard/TrainingLoadCard.jsx'
 import WorkoutHeatmap from '../components/dashboard/WorkoutHeatmap.jsx'
 import ProgramCard from '../components/dashboard/ProgramCard.jsx'
 import StepsCard from '../components/dashboard/StepsCard.jsx'
-import { daysSinceStart } from '../lib/dateUtils.js'
+import { daysSinceStart, todayStr } from '../lib/dateUtils.js'
+import { quoteFor } from '../lib/motivation.js'
+import { useHealthDailySync } from '../hooks/useHealthDailySync.js'
 
 export default function Dashboard() {
   const { state, syncStatus } = useUserDataContext()
+  useHealthDailySync()
 
   return (
     <>
@@ -26,6 +29,9 @@ export default function Dashboard() {
         <h1 style={{ fontSize: 'clamp(40px,9vw,64px)' }}>
           Day <span style={{ color: 'var(--accent)' }}>{daysSinceStart(state.startDate)}</span>
         </h1>
+        <p style={{ fontSize: 13, color: 'var(--text2)', fontStyle: 'italic', lineHeight: 1.45, marginTop: 8, maxWidth: 520 }}>
+          “{quoteFor(todayStr())}”
+        </p>
         <SyncBadge status={syncStatus} />
       </header>
 

@@ -20,6 +20,8 @@ const Habits = z.object({
   alcohol: z.boolean().optional(),
   meditation: z.boolean().optional(),
   egoscue: z.boolean().optional(),
+  creatine: z.boolean().optional(),
+  magnesium: z.boolean().optional(),
 }).partial().passthrough()
 
 const SetEntry = z.object({
@@ -80,6 +82,7 @@ export const StateSchema = z.object({
   healthData: z.record(z.string(), z.record(z.string(), z.any())).optional(),
   healthWorkouts: z.array(z.any()).optional(),
   lastHealthImport: z.string().nullable().optional(),
+  lastHealthSync: z.string().nullable().optional(),
 
   lastSync: z.string().nullable().optional(),
   tzMigrated: z.boolean().optional(),
