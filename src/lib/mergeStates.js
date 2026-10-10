@@ -60,6 +60,24 @@ export function mergeStates(local, cloud) {
     merged.weekDrinks[d] = Math.max(localDrinks[d] || 0, cloudDrinks[d] || 0)
   })
 
+  // Drink days: union (a day logged on either device stays logged)
+  merged.drinkDays = { ...(cloud.drinkDays || {}), ...(local.drinkDays || {}) }
+
+  // Waist history: dedupe by date, keep first occurrence (same rule as weight)
+  const allWaist = [...(cloud.waistHistory || []), ...(local.waistHistory || [])]
+  const waistByDate = {}
+  allWaist.forEach(e => { if (e?.date && !waistByDate[e.date]) waistByDate[e.date] = e })
+  merged.waistHistory = Object.values(waistByDate)
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+
+  // Steps: max per day
+  const ls = local.stepsLog || {}
+  const cs = cloud.stepsLog || {}
+  merged.stepsLog = {}
+  new Set([...Object.keys(ls), ...Object.keys(cs)]).forEach(d => {
+    merged.stepsLog[d] = Math.max(ls[d] || 0, cs[d] || 0)
+  })
+
   // Exercise weights: keep most recent by date
   const localWeights = local.exerciseWeights || {}
   const cloudWeights = cloud.exerciseWeights || {}

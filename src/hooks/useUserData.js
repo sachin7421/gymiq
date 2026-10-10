@@ -6,6 +6,7 @@ import { generateWorkouts } from '../lib/workoutGenerator.js'
 import { generateGoalDrivenWorkouts } from '../lib/goalGenerator.js'
 import { localDateStr } from '../lib/dateUtils.js'
 import { validateState } from '../lib/stateSchema.js'
+import { migrateWeekDrinks } from '../lib/alcohol.js'
 
 const SAVE_DEBOUNCE_MS = 1500
 const LS_KEY = 'gymiqState'
@@ -138,6 +139,8 @@ export function useUserData(userId) {
         else merged = { ...DEFAULT_STATE }
 
         merged = applyMidnightReset(merged)
+        // Carry legacy drink counts into the cap model before the weekly prune drops them.
+        merged = migrateWeekDrinks(merged)
         merged = applyWeeklyDrinkReset(merged)
         merged = regenerateWorkouts(merged)
 

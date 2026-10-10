@@ -1,13 +1,15 @@
 import { getWeekDateStr } from './dateUtils.js'
+import { weekStats, weekWins, DRINK_CAP } from './alcohol.js'
 
 export const HABIT_DEFS = [
   { key: 'workout', emoji: '🏋️', label: 'Completed workout', pts: 2 },
   { key: 'meditation', emoji: '🧘', label: '5–10 min meditation', pts: 1 },
   { key: 'water', emoji: '💧', label: 'Drank 50+ oz of water', pts: 1 },
-  { key: 'protein', emoji: '🥩', label: 'Hit protein goal (160g+)', pts: 2 },
+  { key: 'protein', emoji: '🥩', label: 'Hit ~170g protein', pts: 2 },
   { key: 'sleep', emoji: '😴', label: 'Got 7–9 hours of sleep', pts: 2 },
   { key: 'noLateSnack', emoji: '🚫', label: 'No eating after 9pm', pts: 1 },
-  { key: 'alcohol', emoji: '🍺', label: 'Within alcohol limit today', pts: 1 },
+  { key: 'alcohol', emoji: '🍺', label: 'Alcohol-free day', pts: 1 },
+  { key: 'egoscue', emoji: '🧘', label: 'Back / Egoscue menu', pts: 1 },
 ]
 
 export const MAX_PTS = HABIT_DEFS.reduce((a, h) => a + h.pts, 0)
@@ -89,7 +91,7 @@ export function getWeeklyChallenge(state) {
   const wn = Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1000))
   const ch = [
     { id: 'workout4', icon: '🏋️', title: '4 Workouts This Week', desc: 'Complete the workout habit 4 days this week.', pts: 20, check: () => countHabitDaysThisWeek(state, 'workout') >= 4, progress: () => ({ cur: countHabitDaysThisWeek(state, 'workout'), max: 4 }) },
-    { id: 'drinks4', icon: '🍺', title: 'Stay Under 4 Drinks', desc: 'Log 4 or fewer drinks total this week.', pts: 15, check: () => totalDrinksThisWeek(state) <= 4 && Object.keys(state.weekDrinks || {}).length > 0, progress: () => ({ cur: Math.max(0, 4 - Math.max(0, totalDrinksThisWeek(state) - 4)), max: 4 }) },
+    { id: 'drinkcap', icon: '🍺', title: `Under the ${DRINK_CAP}-Day Cap`, desc: `Finish the week (Mon–Sun) with ${DRINK_CAP} or fewer drinking days.`, pts: 15, check: () => { const w = weekStats(state); return w.complete && w.win }, progress: () => { const w = weekStats(state); return { cur: Math.max(0, DRINK_CAP - w.used), max: DRINK_CAP } } },
     { id: 'protein5', icon: '🥩', title: 'Protein 5 Days', desc: 'Hit your protein goal 5 days this week.', pts: 20, check: () => countHabitDaysThisWeek(state, 'protein') >= 5, progress: () => ({ cur: countHabitDaysThisWeek(state, 'protein'), max: 5 }) },
     { id: 'sleep5', icon: '😴', title: 'Sleep 5 Nights', desc: 'Log 7-9 hours of sleep 5 nights.', pts: 20, check: () => countHabitDaysThisWeek(state, 'sleep') >= 5, progress: () => ({ cur: countHabitDaysThisWeek(state, 'sleep'), max: 5 }) },
     { id: 'meditate5', icon: '🧘', title: 'Meditate 5 Days', desc: 'Complete meditation habit 5 days this week.', pts: 15, check: () => countHabitDaysThisWeek(state, 'meditation') >= 5, progress: () => ({ cur: countHabitDaysThisWeek(state, 'meditation'), max: 5 }) },
@@ -108,7 +110,9 @@ export const ALL_BADGES = [
   { id: 'workouts5', icon: '💪', name: '5 Workouts', check: s => Object.values(s.completedWorkouts || {}).filter(Boolean).length >= 5 },
   { id: 'workouts10', icon: '🏋️', name: '10 Workouts', check: s => Object.values(s.completedWorkouts || {}).filter(Boolean).length >= 10 },
   { id: 'workouts25', icon: '🏆', name: '25 Workouts', check: s => Object.values(s.completedWorkouts || {}).filter(Boolean).length >= 25 },
-  { id: 'dry_week', icon: '🧊', name: 'Dry Week', check: s => totalDrinksThisWeek(s) === 0 && Object.keys(s.weekDrinks || {}).length > 0 },
+  { id: 'dry_week', icon: '🧊', name: 'Dry Week', check: s => weekWins(s).weeks.some(w => w.used === 0) },
+  { id: 'cap_win3', icon: '🥂', name: '3 Cap Wins', check: s => weekWins(s).wins >= 3 },
+  { id: 'cap_win8', icon: '🏆', name: '8 Cap Wins', check: s => weekWins(s).wins >= 8 },
   { id: 'pts100', icon: '💯', name: 'Century', check: s => getTotalPoints(s) >= 100 },
   { id: 'pts300', icon: '🌟', name: 'Committed', check: s => getTotalPoints(s) >= 300 },
   { id: 'pts500', icon: '🏅', name: 'Dedicated', check: s => getTotalPoints(s) >= 500 },

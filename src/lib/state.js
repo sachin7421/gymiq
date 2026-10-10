@@ -27,8 +27,17 @@ export const DEFAULT_STATE = {
   calorieTarget: 2100,
   lastResetDate: '',
 
-  // Alcohol
+  // Alcohol — legacy per-day drink counts (pruned weekly, Sunday-based).
   weekDrinks: {},
+  // Alcohol cap model — drinkDays[dateKey] = true for any day with a drink.
+  // Persistent (never pruned) so alcohol-free % since program start works.
+  drinkDays: {},
+
+  // Waist — waistHistory = [{ date, waist }] newest-first, inches.
+  waistHistory: [],
+
+  // Steps — stepsLog[dateKey] = manual step count for the day.
+  stepsLog: {},
 
   // Habits
   habits: {
@@ -39,6 +48,7 @@ export const DEFAULT_STATE = {
     noLateSnack: false,
     alcohol: false,
     meditation: false,
+    egoscue: false,
   },
 
   // Points & gamification

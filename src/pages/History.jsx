@@ -35,8 +35,8 @@ export default function History() {
       </header>
 
       <div className="card">
-        <p className="card-title">Weight trend</p>
-        <WeightChart history={state.weightHistory || []} goal={state.goalWeight} />
+        <p className="card-title">Weight &amp; waist trend</p>
+        <WeightChart history={state.weightHistory || []} waist={state.waistHistory || []} goal={state.goalWeight} />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 8, marginTop: 12 }}>
           <Stat label="Lost" value={`${lost.toFixed(1)} lbs`} />
           <Stat label="Pace" value={`${pace} lb/wk`} />

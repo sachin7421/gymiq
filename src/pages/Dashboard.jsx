@@ -10,6 +10,8 @@ import PRCard from '../components/dashboard/PRCard.jsx'
 import CoachCard from '../components/dashboard/CoachCard.jsx'
 import TrainingLoadCard from '../components/dashboard/TrainingLoadCard.jsx'
 import WorkoutHeatmap from '../components/dashboard/WorkoutHeatmap.jsx'
+import ProgramCard from '../components/dashboard/ProgramCard.jsx'
+import StepsCard from '../components/dashboard/StepsCard.jsx'
 import { daysSinceStart } from '../lib/dateUtils.js'
 
 export default function Dashboard() {
@@ -29,12 +31,14 @@ export default function Dashboard() {
 
       <OuraCard />
       <CoachCard />
+      <ProgramCard />
       <LevelBanner />
       <WeeklyChallenge />
       <PRCard />
       <WorkoutHeatmap />
       <TrainingLoadCard />
       <WeightCard />
+      <StepsCard />
       <CalorieRing />
       <AlcoholTracker />
       <HabitChecklist />

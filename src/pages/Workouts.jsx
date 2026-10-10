@@ -1,6 +1,7 @@
 import { useUserDataContext } from '../contexts/UserDataContext.jsx'
 import ExerciseItem from '../components/workouts/ExerciseItem.jsx'
 import DailyBrief from '../components/workouts/DailyBrief.jsx'
+import EgoscueMenu from '../components/workouts/EgoscueMenu.jsx'
 import { localDateStr } from '../lib/dateUtils.js'
 
 const DOW_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
@@ -121,6 +122,11 @@ export default function Workouts() {
       >
         {completedDay ? '✓ Workout marked complete — undo' : 'Mark workout complete'}
       </button>
+
+      <div style={{ marginTop: 24 }}>
+        <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 3, color: 'var(--accent3)', textTransform: 'uppercase', marginBottom: 8 }}>REHAB</p>
+        <EgoscueMenu />
+      </div>
     </>
   )
 }

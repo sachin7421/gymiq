@@ -19,6 +19,7 @@ const Habits = z.object({
   noLateSnack: z.boolean().optional(),
   alcohol: z.boolean().optional(),
   meditation: z.boolean().optional(),
+  egoscue: z.boolean().optional(),
 }).partial().passthrough()
 
 const SetEntry = z.object({
@@ -51,6 +52,9 @@ export const StateSchema = z.object({
   lastResetDate: z.string().optional(),
 
   weekDrinks: z.record(z.string(), z.number()).optional(),
+  drinkDays: z.record(z.string(), z.boolean()).optional(),
+  waistHistory: z.array(z.any()).optional(),
+  stepsLog: z.record(z.string(), z.number()).optional(),
 
   habits: Habits.optional(),
 
