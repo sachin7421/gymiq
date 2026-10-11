@@ -43,14 +43,27 @@ self.addEventListener('push', (event) => {
     badge: '/gymiq/icon-192.png',
     tag: data.tag || 'gymiq',
     renotify: true,
-    data: { url: data.url || '/gymiq/' },
+    data: { url: data.url || '/gymiq/', notice: { title, body: options.body, tag: options.tag, ts: Date.now() } },
   }
-  event.waitUntil(self.registration.showNotification(title, options))
+  event.waitUntil((async () => {
+    await self.registration.showNotification(title, options)
+    // If the app is already open, surface the text in-app immediately too.
+    const all = await self.clients.matchAll({ type: 'window', includeUncontrolled: true })
+    for (const c of all) c.postMessage({ type: 'gymiq-notice', notice: options.data.notice })
+  })())
 })
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close()
-  const target = event.notification.data?.url || '/gymiq/'
+  // iOS removes the notification on tap, so carry its text into the app via
+  // ?notice=... — the NoticeBanner shows it until dismissed.
+  let target = event.notification.data?.url || '/gymiq/'
+  try {
+    const u = new URL(target, self.location.origin)
+    const n = event.notification.data?.notice || { title: event.notification.title, body: event.notification.body, ts: Date.now() }
+    u.searchParams.set('notice', JSON.stringify(n))
+    target = u.href
+  } catch { /* leave target as-is */ }
   event.waitUntil((async () => {
     const all = await self.clients.matchAll({ type: 'window', includeUncontrolled: true })
     for (const c of all) {

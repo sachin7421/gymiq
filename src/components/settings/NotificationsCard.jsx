@@ -4,6 +4,7 @@ import {
   pushSupported, isIOS, isStandalone, permissionState, deviceTimeZone,
   getCurrentSubscription, subscribePush, unsubscribePush, loadPrefs, savePrefs, sendTestPush,
 } from '../../lib/push.js'
+import { loadNotices, clearNotices, formatNoticeTime } from '../../lib/notices.js'
 
 const DEFAULT_PREFS = { morning_enabled: true, morning_time: '07:00', evening_enabled: true, evening_time: '20:00' }
 
@@ -13,6 +14,7 @@ export default function NotificationsCard() {
   const [prefs, setPrefs] = useState(DEFAULT_PREFS)
   const [busy, setBusy] = useState(false)
   const [msg, setMsg] = useState(null)
+  const [recent, setRecent] = useState(() => loadNotices().slice(0, 5))
   const supported = pushSupported()
   const needsInstall = isIOS() && !isStandalone()
   const perm = permissionState()
@@ -122,6 +124,26 @@ export default function NotificationsCard() {
 
       {msg && (
         <p style={{ fontSize: 13, marginTop: 10, fontFamily: 'var(--font-mono)', color: msg.ok ? 'var(--success)' : 'var(--danger)' }}>{msg.text}</p>
+      )}
+
+      {recent.length > 0 && (
+        <div style={{ marginTop: 14 }}>
+          <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: 1.5, color: 'var(--muted)', textTransform: 'uppercase', marginBottom: 6 }}>
+            Recent reminders (tap one to re-read it)
+          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            {recent.map((n, i) => (
+              <details key={n.ts + '-' + i} style={{ background: 'var(--surface2)', border: '1px solid var(--border)', borderRadius: 10, padding: '8px 10px' }}>
+                <summary style={{ cursor: 'pointer', fontSize: 14, fontWeight: 500, lineHeight: 1.35 }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--muted)', marginRight: 8 }}>{formatNoticeTime(n.ts)}</span>
+                  {n.title}
+                </summary>
+                {n.body && <p style={{ fontSize: 14, color: 'var(--text2)', lineHeight: 1.45, marginTop: 6 }}>{n.body}</p>}
+              </details>
+            ))}
+          </div>
+          <button className="secondary sm" onClick={() => { clearNotices(); setRecent([]) }} style={{ marginTop: 8 }}>Clear list</button>
+        </div>
       )}
     </div>
   )

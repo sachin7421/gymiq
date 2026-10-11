@@ -5,6 +5,7 @@ import { UserDataProvider, useUserDataContext } from './contexts/UserDataContext
 import AuthScreen from './components/auth/AuthScreen.jsx'
 import OnboardingFlow from './components/onboarding/OnboardingFlow.jsx'
 import BottomNav from './components/shared/BottomNav.jsx'
+import NoticeBanner from './components/shared/NoticeBanner.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import Workouts from './pages/Workouts.jsx'
 import Plan from './pages/Plan.jsx'
@@ -30,6 +31,7 @@ function AuthedShell() {
   return (
     <>
       <div className="app">
+        <NoticeBanner />
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/workouts" element={<Workouts />} />
